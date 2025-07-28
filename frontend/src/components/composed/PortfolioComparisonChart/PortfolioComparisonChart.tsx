@@ -34,10 +34,22 @@ export function PortfolioComparisonChart({ results }: PortfolioComparisonChartPr
   
   // Extract median data from projection_data for each portfolio
   const getMedianData = (portfolio: PortfolioResult) => {
-    if (!portfolio.projection_data?.datasets) {
+    let projectionData = portfolio.projection_data;
+    
+    // Parse if projection_data is a string
+    if (typeof projectionData === 'string') {
+      try {
+        projectionData = JSON.parse(projectionData);
+      } catch (e) {
+        console.error('Failed to parse projection_data:', e);
+        return [];
+      }
+    }
+    
+    if (!projectionData?.datasets) {
       return [];
     }
-    const medianDataset = portfolio.projection_data.datasets.find(
+    const medianDataset = projectionData.datasets.find(
       (d: any) => d.label?.includes('Median') || d.label?.includes('50th')
     );
     return medianDataset?.data || [];
@@ -67,7 +79,19 @@ export function PortfolioComparisonChart({ results }: PortfolioComparisonChartPr
   const trimmedAggressive = aggressiveData.slice(0, lastIdx);
 
   // Use labels from any portfolio (they should all be the same)
-  const allLabels = results.conservative?.projection_data?.labels || results.balanced?.projection_data?.labels || [];
+  const getLabels = (portfolio: PortfolioResult) => {
+    let projectionData = portfolio.projection_data;
+    if (typeof projectionData === 'string') {
+      try {
+        projectionData = JSON.parse(projectionData);
+      } catch (e) {
+        return [];
+      }
+    }
+    return projectionData?.labels || [];
+  };
+  
+  const allLabels = getLabels(results.conservative) || getLabels(results.balanced) || [];
   const labels = allLabels.slice(0, lastIdx);
   
   // If no data found, return empty state

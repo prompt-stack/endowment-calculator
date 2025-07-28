@@ -21,10 +21,23 @@ export function ProjectionChart({ results }: ProjectionChartProps) {
     : results;
   
   // Use the projection data directly from the backend
-  const chartData = portfolioResult?.projection_data || {
+  let chartData = portfolioResult?.projection_data || {
     labels: [],
     datasets: []
   };
+  
+  // Parse if projection_data is a string
+  if (typeof chartData === 'string') {
+    try {
+      chartData = JSON.parse(chartData);
+    } catch (e) {
+      console.error('Failed to parse projection_data:', e);
+      chartData = {
+        labels: [],
+        datasets: []
+      };
+    }
+  }
   
   // Ensure datasets is always an array
   if (!Array.isArray(chartData.datasets)) {

@@ -21,17 +21,28 @@ export function WithdrawalChart({ results, inputs }: WithdrawalChartProps) {
     ? results.portfolios[inputs.portfolioId] || results.portfolios.balanced
     : results;
   
+  // Parse projection_data if it's a string
+  let projectionData = portfolioResult.projection_data;
+  if (typeof projectionData === 'string') {
+    try {
+      projectionData = JSON.parse(projectionData);
+    } catch (e) {
+      console.error('Failed to parse projection_data:', e);
+      projectionData = { labels: [], datasets: [] };
+    }
+  }
+  
   // Extract median data from projection_data
   const getMedianData = () => {
-    if (!portfolioResult.projection_data?.datasets) return [];
-    const medianDataset = portfolioResult.projection_data.datasets.find(
+    if (!projectionData?.datasets) return [];
+    const medianDataset = projectionData.datasets.find(
       (d: any) => d.label?.includes('Median') || d.label?.includes('50th')
     );
     return medianDataset?.data || [];
   };
 
   // Calculate annual withdrawal amounts
-  const years = portfolioResult.projection_data?.labels || [];
+  const years = projectionData?.labels || [];
   const medianPortfolioValues = getMedianData();
   
   // Calculate withdrawal amounts for each year
