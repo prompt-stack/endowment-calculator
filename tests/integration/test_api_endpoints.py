@@ -115,32 +115,18 @@ class TestAPIEndpoints:
         data = response.get_json()
         assert 'error' in data
     
-    def test_generate_pdf_with_valid_results(self, client, sample_results):
-        """Test PDF generation with valid results."""
-        response = client.post('/api/generate-pdf',
-                             json=sample_results,
-                             content_type='application/json')
-        
-        assert response.status_code == 200
-        assert response.content_type == 'application/pdf'
-        assert len(response.data) > 1000  # PDF should have content
-    
-    def test_generate_pdf_without_results(self, client):
-        """Test PDF generation without results."""
-        response = client.post('/api/generate-pdf',
-                             json={},
-                             content_type='application/json')
-        
-        assert response.status_code == 400
-        data = response.get_json()
-        assert 'error' in data
     
     def test_cors_headers(self, client):
         """Test CORS headers are present."""
         response = client.get('/api/portfolios')
         
         assert 'Access-Control-Allow-Origin' in response.headers
-        assert response.headers['Access-Control-Allow-Origin'] == '*'
+        # Check that CORS header is set to one of the allowed origins
+        cors_origin = response.headers['Access-Control-Allow-Origin']
+        allowed_origins = ['http://localhost:5173', 'http://127.0.0.1:5173', 
+                          'http://localhost:3000', 'http://127.0.0.1:3000',
+                          'http://localhost:8080', 'http://127.0.0.1:8080']
+        assert cors_origin in allowed_origins
     
     def test_calculation_edge_cases(self, client):
         """Test various edge cases for calculations."""

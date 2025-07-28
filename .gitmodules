@@ -1,0 +1,3 @@
+[submodule "grammar-ops"]
+	path = grammar-ops
+	url = https://github.com/prompt-stack/grammar-ops.git

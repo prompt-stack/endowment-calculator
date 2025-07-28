@@ -77,6 +77,11 @@ def api_calculate():
         
         # Extract parameters
         starting_balance = float(data.get('starting_balance', 1000000))
+        
+        # Validate starting balance
+        if starting_balance <= 0:
+            return jsonify({'error': 'Starting balance must be greater than 0'}), 400
+            
         withdrawal_method = data.get('withdrawal_method', 'percentage')
         withdrawal_rate = data.get('withdrawal_rate')
         withdrawal_amount = data.get('withdrawal_amount')

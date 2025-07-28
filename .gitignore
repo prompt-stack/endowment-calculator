@@ -45,8 +45,10 @@ htmlcov/
 # Archive folder (from cleanup)
 archive/
 
-# Grammar-ops (not core to the app)
+# Grammar-ops main directory (downloaded version)
 grammar-ops-main/
+
+# Grammar-ops submodule is tracked separately via .gitmodules
 
 # Old files
 app_old.py
