@@ -47,4 +47,7 @@ archive/
 
 # Grammar-ops (not core to the app)
 grammar-ops-main/
+
+# Old files
+app_old.py
 EOF < /dev/null
