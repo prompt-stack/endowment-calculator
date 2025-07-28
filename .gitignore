@@ -1,0 +1,50 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+.venv
+
+# Flask
+instance/
+.webassets-cache
+*.log
+
+# Frontend
+frontend/node_modules/
+frontend/dist/
+frontend/.env
+frontend/.env.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Docker
+*.pid
+
+# Environment
+.env
+.env.local
+
+# Test Coverage
+.coverage
+htmlcov/
+.pytest_cache/
+
+# Archive folder (from cleanup)
+archive/
+
+# Grammar-ops (not core to the app)
+grammar-ops-main/
+EOF < /dev/null

@@ -1,0 +1,73 @@
+/**
+ * @fileoverview Results summary component styles
+ * @component ResultsSummary
+ * @layer features
+ */
+
+.results-summary {
+  width: 100%;
+  margin-bottom: 2rem;
+}
+
+.results-summary__title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #1a202c;
+  margin-bottom: 1.5rem;
+}
+
+.results-summary__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.results-summary__insights {
+  background-color: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+}
+
+.results-summary__insights h3 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #1a202c;
+  margin-bottom: 1rem;
+}
+
+.results-summary__insights ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.results-summary__insights li {
+  padding: 0.75rem;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.insight--positive {
+  background-color: #f0fdf4;
+  color: #059669;
+  border: 1px solid #d1fae5;
+}
+
+.insight--negative {
+  background-color: #fef2f2;
+  color: #dc2626;
+  border: 1px solid #fecaca;
+}
+
+.insight--neutral {
+  background-color: #f3f4f6;
+  color: #374151;
+  border: 1px solid #e5e7eb;
+}

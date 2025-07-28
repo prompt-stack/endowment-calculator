@@ -1,0 +1,16 @@
+<div class="text-center">
+    <svg class="mx-auto h-12 w-12 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+    </svg>
+    <h3 class="mt-2 text-sm font-medium text-gray-900">Report Sent!</h3>
+    <p class="mt-1 text-sm text-gray-500">
+        We've sent the full analysis to {{ email }}
+    </p>
+    <div class="mt-4">
+        <button type="button" 
+                onclick="document.getElementById('download-modal').classList.add('hidden')"
+                class="text-sm text-blue-600 hover:text-blue-700">
+            Close
+        </button>
+    </div>
+</div>

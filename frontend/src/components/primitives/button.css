@@ -1,0 +1,115 @@
+/**
+ * @fileoverview Button primitive styles
+ * @component Button
+ * @layer primitives
+ */
+
+.btn {
+  /* Base styles */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border: none;
+  border-radius: 0.375rem;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.15s ease-in-out;
+  font-family: inherit;
+  
+  /* Prevent selection */
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Size variants */
+.btn--sm {
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem;
+  line-height: 1.25;
+}
+
+.btn--md {
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.btn--lg {
+  padding: 1rem 1.5rem;
+  font-size: 1.125rem;
+  line-height: 1.75;
+}
+
+/* Color variants */
+.btn--primary {
+  background-color: #2563eb;
+  color: white;
+}
+
+.btn--primary:hover:not(:disabled) {
+  background-color: #1d4ed8;
+}
+
+.btn--primary:active:not(:disabled) {
+  background-color: #1e40af;
+}
+
+.btn--secondary {
+  background-color: #f1f5f9;
+  color: #475569;
+  border: 1px solid #e2e8f0;
+}
+
+.btn--secondary:hover:not(:disabled) {
+  background-color: #e2e8f0;
+  color: #334155;
+}
+
+.btn--danger {
+  background-color: #dc2626;
+  color: white;
+}
+
+.btn--danger:hover:not(:disabled) {
+  background-color: #b91c1c;
+}
+
+/* States */
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn--loading {
+  position: relative;
+  color: transparent;
+}
+
+.btn__spinner {
+  position: absolute;
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid transparent;
+  border-top: 2px solid currentColor;
+  border-radius: 50%;
+  animation: btn-spin 1s linear infinite;
+}
+
+.btn__text {
+  color: currentColor;
+}
+
+.btn--loading .btn__text {
+  opacity: 0.7;
+}
+
+@keyframes btn-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

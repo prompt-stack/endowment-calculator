@@ -1,0 +1,213 @@
+/**
+ * @fileoverview Luxury button component styles
+ * @component Button
+ * @theme Sophisticated Wealth
+ */
+
+/* Base Button - Refined Elegance */
+.btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  padding: var(--space-md) var(--space-2xl);
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-charcoal);
+  background-color: var(--color-pure);
+  border: 1px solid var(--color-charcoal);
+  border-radius: var(--border-radius-sm);
+  cursor: pointer;
+  transition: all var(--transition-base);
+  white-space: nowrap;
+  text-decoration: none;
+  overflow: hidden;
+  
+  /* Remove sliding animation - use simple hover */
+  
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+    color: var(--color-pure);
+  }
+  
+  &:active {
+    transform: translateY(0);
+    box-shadow: var(--shadow-sm);
+  }
+  
+  &:focus-visible {
+    outline: 2px solid var(--color-champagne);
+    outline-offset: 2px;
+  }
+  
+}
+
+/* Primary Variant - Statement Button */
+.btn--primary {
+  color: var(--color-pure);
+  background-color: var(--color-charcoal);
+  border-color: var(--color-charcoal);
+  
+  &:hover {
+    background-color: var(--color-graphite);
+    border-color: var(--color-graphite);
+    color: var(--color-pure);
+  }
+}
+
+/* Secondary Variant - Subtle Elegance */
+.btn--secondary {
+  color: var(--color-charcoal);
+  background-color: transparent;
+  border-color: var(--color-platinum);
+  
+  &:hover {
+    background-color: var(--color-pearl);
+    color: var(--color-charcoal);
+    border-color: var(--color-silver);
+  }
+}
+
+/* Accent Variant - Gold Touch */
+.btn--accent {
+  color: var(--color-charcoal);
+  background-color: var(--color-pale-gold);
+  border-color: var(--color-champagne);
+  
+  &:hover {
+    background-color: var(--color-champagne);
+    color: var(--color-pure);
+    border-color: var(--color-champagne);
+  }
+}
+
+/* Ghost Variant - Minimal */
+.btn--ghost {
+  color: var(--color-charcoal);
+  background-color: transparent;
+  border-color: transparent;
+  
+  &:hover {
+    background-color: var(--color-pearl);
+    color: var(--color-charcoal);
+    border-color: var(--color-pearl);
+  }
+}
+
+/* Size Variants */
+.btn--sm {
+  padding: var(--space-sm) var(--space-lg);
+  font-size: var(--text-xs);
+  letter-spacing: 0.06em;
+}
+
+.btn--lg {
+  padding: var(--space-lg) var(--space-3xl);
+  font-size: var(--text-base);
+  letter-spacing: 0.1em;
+}
+
+/* Loading State */
+.btn--loading {
+  color: transparent;
+  pointer-events: none;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    top: 50%;
+    left: 50%;
+    margin-left: -8px;
+    margin-top: -8px;
+    border: 2px solid var(--color-platinum);
+    border-top-color: var(--color-charcoal);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+  
+  &.btn--primary::after {
+    border-color: rgba(255, 255, 255, 0.3);
+    border-top-color: var(--color-pure);
+  }
+}
+
+/* Disabled State */
+.btn:disabled,
+.btn--disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+  
+  &:hover {
+    transform: none;
+    box-shadow: none;
+  }
+}
+
+/* Icon Support */
+.btn__icon {
+  width: 1em;
+  height: 1em;
+  flex-shrink: 0;
+}
+
+/* Button Group */
+.btn-group {
+  display: inline-flex;
+  gap: var(--space-xs);
+  
+  .btn {
+    border-radius: 0;
+  }
+  
+  .btn:first-child {
+    border-top-left-radius: var(--border-radius-sm);
+    border-bottom-left-radius: var(--border-radius-sm);
+  }
+  
+  .btn:last-child {
+    border-top-right-radius: var(--border-radius-sm);
+    border-bottom-right-radius: var(--border-radius-sm);
+  }
+  
+  .btn:not(:last-child) {
+    border-right: 0;
+  }
+}
+
+/* Special Animation for CTA */
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(212, 175, 55, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(212, 175, 55, 0);
+  }
+}
+
+.btn--pulse {
+  animation: pulse 2s infinite;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .btn {
+    padding: var(--space-sm) var(--space-lg);
+    font-size: var(--text-xs);
+  }
+  
+  .btn--lg {
+    padding: var(--space-md) var(--space-xl);
+    font-size: var(--text-sm);
+  }
+}

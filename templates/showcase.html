@@ -1,0 +1,315 @@
+{# 
+  @template templates/showcase.html
+  @type page
+#}
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+        /* Clean layout matching calculator aesthetic */
+        .showcase-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: var(--space-xl);
+        }
+        
+        .showcase-header {
+            text-align: center;
+            margin-bottom: var(--space-2xl);
+            padding: var(--space-2xl) 0;
+            background: var(--surface-muted);
+            border-radius: var(--border-radius);
+            border: 1px solid var(--border-color-light);
+        }
+        
+        .showcase-header h1 {
+            color: var(--color-primary);
+            margin-bottom: var(--space-md);
+            font-size: 2rem;
+            font-weight: 600;
+        }
+        
+        .showcase-header p {
+            color: var(--color-gray-600);
+            font-size: 1.125rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .models-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: var(--space-xl);
+        }
+        
+        .model-card {
+            background: var(--surface-primary);
+            border: 1px solid var(--border-color-light);
+            border-radius: var(--border-radius);
+            padding: var(--space-xl);
+            transition: all 0.2s ease;
+        }
+        
+        .model-card:hover {
+            border-color: var(--color-primary);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .model-header {
+            padding: 1.5rem;
+            background: var(--color-gray-50);
+            border-bottom: 1px solid var(--color-gray-200);
+        }
+        
+        .model-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.75rem;
+        }
+        
+        .badge-saas {
+            background: #e0f2fe;
+            color: #0277bd;
+        }
+        
+        .badge-leadgen {
+            background: #f3e5f5;
+            color: #7b1fa2;
+        }
+        
+        .badge-ai {
+            background: #e8f5e8;
+            color: #2e7d32;
+        }
+        
+        .model-title {
+            font-size: 1.25rem;
+            font-weight: bold;
+            margin: 0 0 0.5rem 0;
+            color: var(--color-primary);
+        }
+        
+        .model-subtitle {
+            color: var(--color-gray-600);
+            margin: 0;
+            font-size: 0.9375rem;
+        }
+        
+        .model-content {
+            padding: 1.5rem;
+        }
+        
+        .feature-list {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 1.5rem 0;
+        }
+        
+        .feature-list li {
+            padding: 0.5rem 0;
+            display: flex;
+            align-items: center;
+            font-size: 0.9375rem;
+        }
+        
+        .feature-list li::before {
+            content: "✓";
+            color: var(--color-success);
+            font-weight: bold;
+            margin-right: 0.75rem;
+        }
+        
+        .model-demo {
+            background: var(--color-gray-50);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid var(--color-accent);
+        }
+        
+        .demo-label {
+            font-size: 0.75rem;
+            color: var(--color-gray-600);
+            text-transform: uppercase;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .model-actions {
+            display: flex;
+            gap: 0.75rem;
+            margin-top: 1.5rem;
+        }
+        
+        .btn-demo {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            border-radius: 6px;
+            font-weight: 600;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.2s ease;
+        }
+        
+        .btn-primary-demo {
+            background: var(--color-primary);
+            color: white;
+        }
+        
+        .btn-primary-demo:hover {
+            background: var(--color-primary-light);
+            color: white;
+        }
+        
+        .btn-secondary-demo {
+            background: var(--color-gray-100);
+            color: var(--color-gray-700);
+            border: 1px solid var(--color-gray-300);
+        }
+        
+        .btn-secondary-demo:hover {
+            background: var(--color-gray-200);
+            color: var(--color-gray-800);
+        }
+        
+        .pricing-highlight {
+            background: var(--color-accent);
+            color: white;
+            padding: 0.75rem;
+            text-align: center;
+            font-weight: 600;
+            margin-top: 1rem;
+            border-radius: 6px;
+        }
+        
+        .coming-soon {
+            position: relative;
+            opacity: 0.7;
+        }
+        
+        .coming-soon::after {
+            content: "COMING SOON";
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--color-warning);
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        
+        .showcase-footer {
+            background: var(--color-gray-50);
+            padding: 2rem 0;
+            text-align: center;
+            margin-top: 3rem;
+        }
+</style>
+
+    <div class="showcase-container">
+        <div class="showcase-header">
+            <h1>Endowment Calculator Platform</h1>
+            <p>White-label Monte Carlo analysis solution. Customize the experience to match your firm's brand and client engagement strategy.</p>
+        </div>
+
+        <div class="models-grid">
+        <!-- Self-Service SaaS Model -->
+        <div class="model-card">
+            <div class="model-badge badge-saas">Self-Service SaaS</div>
+            <h3 class="model-title">DIY Analytics Platform</h3>
+            <p class="model-subtitle">Let clients run their own analyses</p>
+                <ul class="feature-list">
+                    <li>Full calculator access</li>
+                    <li>Unlimited calculations</li>
+                    <li>Basic PDF exports</li>
+                    <li>Standard charts & analysis</li>
+                    <li>Email support</li>
+                </ul>
+                
+                <div class="model-demo">
+                    <div class="demo-label">User Experience</div>
+                    <div>Direct access → Calculate → Download PDF</div>
+                </div>
+                
+                <div style="background: var(--color-gray-50); padding: 0.75rem; border-radius: 6px; margin-top: 1rem;">
+                    <div style="font-size: 0.875rem; font-weight: 600; color: var(--color-primary);">White-Label Features</div>
+                    <div style="font-size: 0.8125rem; color: var(--color-gray-600);">Custom branding, domain, and client portal</div>
+                </div>
+                
+            </div>
+        </div>
+
+        <!-- Lead Generation Model -->
+        <div class="model-card">
+            <div class="model-header">
+                <div class="model-badge badge-leadgen">Lead Generation</div>
+                <h3 class="model-title">Professional Services</h3>
+                <p class="model-subtitle">Capture leads for high-touch consulting</p>
+            </div>
+            <div class="model-content">
+                <ul class="feature-list">
+                    <li>Report preview & teaser</li>
+                    <li>Lead capture forms</li>
+                    <li>Professional PDF reports</li>
+                    <li>CRM integration</li>
+                    <li>Follow-up automation</li>
+                </ul>
+                
+                <div class="model-demo">
+                    <div class="demo-label">User Experience</div>
+                    <div>Calculate → Preview Value → Provide Contact → Professional Report</div>
+                </div>
+                
+                <div style="background: var(--color-gray-50); padding: 0.75rem; border-radius: 6px; margin-top: 1rem;">
+                    <div style="font-size: 0.875rem; font-weight: 600; color: var(--color-primary);">CRM Integration</div>
+                    <div style="font-size: 0.8125rem; color: var(--color-gray-600);">Salesforce, HubSpot, custom webhooks</div>
+                </div>
+                
+            </div>
+        </div>
+
+        <!-- AI-Powered Model -->
+        <div class="model-card coming-soon">
+            <div class="model-header">
+                <div class="model-badge badge-ai">AI-Powered Advisory</div>
+                <h3 class="model-title">Intelligent Insights</h3>
+                <p class="model-subtitle">LLM-enhanced personalized recommendations</p>
+            </div>
+            <div class="model-content">
+                <ul class="feature-list">
+                    <li>AI-generated insights</li>
+                    <li>Personalized recommendations</li>
+                    <li>Strategic implementation guidance</li>
+                    <li>Board presentation materials</li>
+                    <li>White-glove support</li>
+                </ul>
+                
+                <div class="model-demo">
+                    <div class="demo-label">Enhanced Features</div>
+                    <div>"For a mid-sized education nonprofit, this withdrawal rate is conservative compared to peer institutions. Consider establishing a spending policy reserve..."</div>
+                </div>
+                
+                <div style="background: var(--color-gray-50); padding: 0.75rem; border-radius: 6px; margin-top: 1rem;">
+                    <div style="font-size: 0.875rem; font-weight: 600; color: var(--color-primary);">AI-Enhanced Features</div>
+                    <div style="font-size: 0.8125rem; color: var(--color-gray-600);">Custom insights, branded recommendations</div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+        <!-- Showcase Footer -->
+        <div style="margin-top: var(--space-2xl); padding: var(--space-2xl); background: var(--surface-muted); border-radius: var(--border-radius); border: 1px solid var(--border-color-light); text-align: center;">
+            <h3 style="margin: 0 0 var(--space-md) 0; color: var(--color-primary);">White-Label Partnership</h3>
+            <p style="margin: 0 0 var(--space-lg) 0; color: var(--color-gray-600);">Customize the platform to match your firm's brand and client engagement needs</p>
+            <a href="/" class="btn btn-primary" style="padding: 1rem 2rem;">Explore Features</a>
+        </div>
+    </div>
+{% endblock %}

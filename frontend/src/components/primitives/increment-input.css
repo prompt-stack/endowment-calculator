@@ -1,0 +1,106 @@
+/**
+ * @fileoverview Increment input component styles
+ * @component IncrementInput
+ * @layer primitives
+ */
+
+.increment-input {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.increment-input__label {
+  font-family: var(--font-secondary);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-charcoal);
+  margin-bottom: 4px;
+}
+
+.increment-input__controls {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  border: 1px solid var(--color-muted);
+  border-radius: 4px;
+  overflow: hidden;
+  background-color: var(--color-pure);
+  transition: border-color 150ms ease;
+}
+
+.increment-input__controls:focus-within {
+  border-color: var(--color-charcoal);
+  box-shadow: 0 0 0 2px rgba(26, 26, 26, 0.1);
+}
+
+.increment-input__button {
+  background-color: var(--color-whisper);
+  border: none;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 18px;
+  color: var(--color-charcoal);
+  transition: all 150ms ease;
+  user-select: none;
+}
+
+.increment-input__button:hover:not(:disabled) {
+  background-color: var(--color-charcoal);
+  color: var(--color-pure);
+}
+
+.increment-input__button:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.increment-input__button:first-child {
+  border-right: 1px solid var(--color-muted);
+}
+
+.increment-input__button:last-child {
+  border-left: 1px solid var(--color-muted);
+}
+
+.increment-input__field {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  padding: 0 var(--spacing-sm);
+  min-width: 80px;
+}
+
+.increment-input__input {
+  border: none;
+  outline: none;
+  background: transparent;
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  color: var(--color-charcoal);
+  text-align: center;
+  width: 100%;
+  padding: 8px 0;
+}
+
+/* Hide spinner buttons */
+.increment-input__input::-webkit-inner-spin-button,
+.increment-input__input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.increment-input__input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.increment-input__suffix {
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  color: var(--color-stone);
+  margin-left: 4px;
+}

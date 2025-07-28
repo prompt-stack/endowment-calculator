@@ -1,0 +1,349 @@
+/**
+ * @fileoverview Luxury calculator component styles
+ * @component Calculator
+ * @theme Sophisticated Wealth
+ */
+
+@import '../../../styles/luxury-theme.css';
+
+.calculator {
+  display: grid;
+  grid-template-columns: 440px 1fr;
+  gap: 0;
+  height: 100vh;
+  background-color: var(--color-alabaster);
+}
+
+/* Sidebar - Refined Input Panel */
+.calculator__sidebar {
+  background-color: var(--color-pure);
+  border-right: 1px solid var(--color-pearl);
+  overflow-y: auto;
+  padding: var(--space-3xl) var(--space-2xl);
+  
+  /* Subtle gradient background */
+  background-image: linear-gradient(
+    to bottom,
+    var(--color-pure),
+    rgba(244, 234, 213, 0.03)
+  );
+}
+
+/* Custom scrollbar for sidebar */
+.calculator__sidebar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.calculator__sidebar::-webkit-scrollbar-thumb {
+  background: var(--color-pearl);
+}
+
+.calculator__form-card {
+  max-width: 100%;
+}
+
+/* Title - Elegant Serif */
+.calculator__title {
+  font-family: var(--font-serif);
+  font-size: var(--text-2xl);
+  font-weight: var(--font-regular);
+  color: var(--color-charcoal);
+  margin-bottom: var(--space-3xl);
+  text-align: center;
+  letter-spacing: -0.02em;
+  
+  /* Subtle gold underline */
+  &::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 1px;
+    background: linear-gradient(
+      to right,
+      transparent,
+      var(--color-champagne),
+      transparent
+    );
+    margin: var(--space-lg) auto 0;
+  }
+}
+
+/* Form Layout */
+.calculator__form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+/* Field Styling */
+.calculator__field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.calculator__label {
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  color: var(--color-ash);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Radio Group - Minimal Design */
+.calculator__radio-group {
+  display: flex;
+  gap: var(--space-lg);
+  padding: var(--space-md) 0;
+}
+
+.calculator__radio {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-size: var(--text-sm);
+  color: var(--color-charcoal);
+  cursor: pointer;
+  transition: color var(--transition-fast);
+  
+  &:hover {
+    color: var(--color-champagne);
+  }
+}
+
+.calculator__radio input[type="radio"] {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--color-charcoal);
+}
+
+/* Year Selection - Elegant Buttons */
+.calculator__button-group {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-sm);
+}
+
+.calculator__year-btn {
+  padding: var(--space-md);
+  border: 1px solid var(--color-pearl);
+  border-radius: var(--border-radius-sm);
+  background-color: var(--color-pure);
+  color: var(--color-ash);
+  font-size: var(--text-sm);
+  font-weight: var(--font-regular);
+  cursor: pointer;
+  transition: all var(--transition-base);
+  
+  &:hover {
+    border-color: var(--color-champagne);
+    color: var(--color-charcoal);
+    background-color: var(--color-pale-gold);
+  }
+}
+
+.calculator__year-btn.active {
+  background-color: var(--color-charcoal);
+  color: var(--color-pure);
+  border-color: var(--color-charcoal);
+  
+  &:hover {
+    background-color: var(--color-graphite);
+    border-color: var(--color-graphite);
+  }
+}
+
+/* Select Dropdown - Premium Style */
+.calculator__select {
+  width: 100%;
+  padding: var(--space-md) var(--space-lg);
+  border: 1px solid var(--color-pearl);
+  border-radius: var(--border-radius-sm);
+  font-size: var(--text-base);
+  font-weight: var(--font-light);
+  color: var(--color-charcoal);
+  background-color: var(--color-pure);
+  cursor: pointer;
+  transition: all var(--transition-base);
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L5 5L9 1' stroke='%23666666' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right var(--space-lg) center;
+  padding-right: var(--space-3xl);
+}
+
+.calculator__select:hover {
+  border-color: var(--color-silver);
+}
+
+.calculator__select:focus {
+  outline: none;
+  border-color: var(--color-champagne);
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+}
+
+/* Advanced Settings - Refined Details */
+.calculator__advanced {
+  border: 1px solid var(--color-pearl);
+  border-radius: var(--border-radius-sm);
+  padding: 0;
+  margin-top: var(--space-md);
+  overflow: hidden;
+  transition: all var(--transition-base);
+}
+
+.calculator__advanced-summary {
+  padding: var(--space-lg);
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  color: var(--color-ash);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  
+  &:hover {
+    color: var(--color-charcoal);
+    background-color: var(--color-pearl);
+  }
+  
+  &::marker {
+    display: none;
+  }
+  
+  &::-webkit-details-marker {
+    display: none;
+  }
+}
+
+.calculator__advanced[open] {
+  background-color: var(--color-alabaster);
+  
+  .calculator__advanced-summary {
+    border-bottom: 1px solid var(--color-pearl);
+    margin-bottom: 0;
+  }
+  
+  .calculator__field {
+    padding: 0 var(--space-lg) var(--space-lg);
+    
+    &:first-of-type {
+      padding-top: var(--space-lg);
+    }
+  }
+}
+
+/* Checkbox - Minimal Luxury */
+.calculator__checkbox {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-size: var(--text-sm);
+  color: var(--color-charcoal);
+  cursor: pointer;
+  padding: var(--space-sm) 0;
+  
+  input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--color-charcoal);
+  }
+}
+
+/* Submit Button Section */
+.calculator__submit {
+  margin-top: var(--space-2xl);
+  padding-top: var(--space-2xl);
+  border-top: 1px solid var(--color-pearl);
+}
+
+/* Error State - Subtle */
+.calculator__error {
+  padding: var(--space-lg);
+  background-color: rgba(198, 40, 40, 0.05);
+  border: 1px solid rgba(198, 40, 40, 0.2);
+  border-radius: var(--border-radius-sm);
+  color: var(--color-danger);
+  font-size: var(--text-sm);
+  font-weight: var(--font-regular);
+}
+
+/* Results Section - Spacious & Clean */
+.calculator__results {
+  padding: var(--space-3xl);
+  overflow-y: auto;
+  background-color: var(--color-alabaster);
+}
+
+.calculator__results-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xl);
+  animation: fadeIn var(--transition-slow) ease-out;
+}
+
+/* Action Buttons - Refined Group */
+.calculator__actions {
+  display: flex;
+  gap: var(--space-lg);
+  padding: var(--space-xl) 0;
+  border-bottom: 1px solid var(--color-pearl);
+}
+
+/* Empty State - Elegant Placeholder */
+.calculator__empty-state {
+  background-color: var(--color-pure);
+  border: 1px solid var(--color-pearl);
+  border-radius: var(--border-radius-md);
+  padding: var(--space-3xl);
+  text-align: center;
+  color: var(--color-silver);
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.calculator__empty-state h3 {
+  font-family: var(--font-serif);
+  font-size: var(--text-xl);
+  font-weight: var(--font-regular);
+  color: var(--color-charcoal);
+  margin-bottom: var(--space-md);
+}
+
+.calculator__empty-state p {
+  font-size: var(--text-base);
+  line-height: 1.6;
+  max-width: 500px;
+  color: var(--color-ash);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 1024px) {
+  .calculator {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+  }
+  
+  .calculator__sidebar {
+    border-right: none;
+    border-bottom: 1px solid var(--color-pearl);
+    max-height: 50vh;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .calculator__sidebar {
+    display: none;
+  }
+  
+  .calculator__results {
+    padding: 0;
+    background: white;
+  }
+}

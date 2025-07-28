@@ -1,0 +1,104 @@
+#!/usr/bin/env python3
+"""
+Nonprofit spending calculator CLI.
+Test Monte Carlo simulations from the command line.
+"""
+
+import sys
+import os
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
+
+import argparse
+import json
+from lib.core import MonteCarloSimulator, PortfolioPreset
+
+
+def main():
+    parser = argparse.ArgumentParser(
+        description='Calculate sustainable spending for nonprofit endowments'
+    )
+    
+    # Required arguments
+    parser.add_argument('balance', type=float, help='Starting balance (e.g., 1000000)')
+    
+    # Optional arguments
+    parser.add_argument('--withdrawal', type=float, help='Annual withdrawal amount')
+    parser.add_argument('--rate', type=float, help='Withdrawal rate (e.g., 0.04 for 4%)')
+    parser.add_argument('--years', type=int, default=50, help='Years to simulate (default: 50)')
+    parser.add_argument('--portfolio', choices=['conservative', 'balanced', 'aggressive'], 
+                       default='balanced', help='Portfolio type (default: balanced)')
+    parser.add_argument('--inflation', type=float, default=0.03, 
+                       help='Annual inflation rate (default: 0.03)')
+    parser.add_argument('--iterations', type=int, default=5000,
+                       help='Monte Carlo iterations (default: 5000)')
+    parser.add_argument('--json', action='store_true', help='Output as JSON')
+    
+    args = parser.parse_args()
+    
+    # Get portfolio
+    portfolio = PortfolioPreset.get(args.portfolio)
+    
+    # Calculate withdrawal amount
+    if args.withdrawal:
+        withdrawal = args.withdrawal
+    elif args.rate:
+        withdrawal = args.balance * args.rate
+    else:
+        withdrawal = args.balance * 0.04  # Default 4%
+    
+    # Run simulation
+    simulator = MonteCarloSimulator(
+        starting_balance=args.balance,
+        annual_return=portfolio.expected_return,
+        annual_std_dev=portfolio.std_deviation,
+        withdrawal_amount=withdrawal,
+        years=args.years,
+        inflation_rate=args.inflation
+    )
+    
+    print(f"\nRunning {args.iterations} Monte Carlo simulations...")
+    results = simulator.run_simulation(args.iterations)
+    
+    if args.json:
+        print(json.dumps(results, indent=2))
+    else:
+        # Pretty print results
+        print(f"\n{'='*60}")
+        print(f"NONPROFIT SPENDING ANALYSIS")
+        print(f"{'='*60}")
+        print(f"Starting Balance: ${args.balance:,.0f}")
+        print(f"Portfolio: {portfolio.name}")
+        print(f"Annual Withdrawal: ${withdrawal:,.0f} ({withdrawal/args.balance:.1%})")
+        print(f"Time Horizon: {args.years} years")
+        print(f"Inflation Rate: {args.inflation:.1%}")
+        print(f"\n{'='*60}")
+        print(f"RESULTS")
+        print(f"{'='*60}")
+        print(f"Success Rate: {results['success_rate']:.1%}")
+        print(f"Median Final Balance: ${results['median_final_balance']:,.0f}")
+        
+        if results['average_depletion_year']:
+            print(f"Average Depletion Year: {results['average_depletion_year']:.1f}")
+        
+        # Success interpretation
+        print(f"\n{'='*60}")
+        print(f"INTERPRETATION")
+        print(f"{'='*60}")
+        
+        if results['success_rate'] >= 0.8:
+            print("✓ HIGH SUCCESS: This spending rate is very sustainable")
+        elif results['success_rate'] >= 0.7:
+            print("✓ GOOD SUCCESS: This spending rate is reasonably sustainable")
+        elif results['success_rate'] >= 0.5:
+            print("⚠ MODERATE RISK: Consider reducing spending or increasing risk")
+        else:
+            print("✗ HIGH RISK: This spending rate is likely unsustainable")
+            
+        # Calculate sustainable rate
+        print(f"\nCalculating sustainable withdrawal rate...")
+        sustainable = simulator.calculate_sustainable_withdrawal(0.7)
+        print(f"Recommended withdrawal for 70% success: ${sustainable:,.0f} ({sustainable/args.balance:.1%})")
+
+
+if __name__ == '__main__':
+    main()

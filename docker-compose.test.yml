@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  backend-test:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    command: python -m pytest tests/ -v --cov=lib --cov=app --cov-report=term-missing
+    volumes:
+      - ./tests:/app/tests
+      - ./lib:/app/lib
+      - ./app.py:/app/app.py
+      - ./data:/app/data
+      - ./templates:/app/templates
+      - ./static:/app/static
+    environment:
+      - TESTING=true
+    networks:
+      - test-network
+
+  frontend-test:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.dev
+    command: npm test -- --run
+    volumes:
+      - ./frontend/src:/app/src
+      - ./frontend/vitest.config.ts:/app/vitest.config.ts
+    environment:
+      - CI=true
+    networks:
+      - test-network
+
+networks:
+  test-network:
+    driver: bridge

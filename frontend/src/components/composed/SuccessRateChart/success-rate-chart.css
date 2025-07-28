@@ -1,0 +1,90 @@
+/**
+ * @fileoverview Styles for success rate comparison chart
+ * @layer composed
+ * @status stable
+ */
+
+.success-rate-chart {
+  margin-top: 2rem;
+}
+
+.success-rate-chart__title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--color-gray-900);
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.success-rate-chart__subtitle {
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: var(--color-gray-600);
+}
+
+.success-rate-chart__container {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  height: 300px;
+  position: relative;
+}
+
+.success-rate-chart__details {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.success-detail {
+  background: var(--color-gray-50);
+  padding: 1.5rem;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.success-detail h4 {
+  font-weight: 500;
+  color: var(--color-gray-700);
+  margin-bottom: 0.5rem;
+  font-size: 0.875rem;
+}
+
+.success-percentage {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--color-gray-900);
+  margin-bottom: 0.5rem;
+}
+
+.success-detail p {
+  font-size: 0.75rem;
+  color: var(--color-gray-600);
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .success-rate-chart__container {
+    height: 250px;
+    padding: 1rem;
+  }
+  
+  .success-rate-chart__details {
+    gap: 1rem;
+  }
+  
+  .success-detail {
+    padding: 1rem;
+  }
+  
+  .success-percentage {
+    font-size: 1.5rem;
+  }
+}

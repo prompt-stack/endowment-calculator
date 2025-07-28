@@ -1,0 +1,19 @@
+/**
+ * @fileoverview Projection chart component styles
+ * @component ProjectionChart
+ * @layer composed
+ */
+
+.projection-chart {
+  width: 100%;
+  position: relative;
+  background-color: white;
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+}
+
+.projection-chart canvas {
+  width: 100% !important;
+  height: 100% !important;
+}

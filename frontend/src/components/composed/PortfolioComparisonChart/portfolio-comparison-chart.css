@@ -1,0 +1,61 @@
+/**
+ * @fileoverview Styles for portfolio comparison chart
+ * @layer composed
+ * @status stable
+ */
+
+.portfolio-comparison-chart {
+  margin-top: 2rem;
+}
+
+.portfolio-comparison-chart__title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--color-charcoal);
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.portfolio-comparison-chart__container {
+  height: 400px;
+  position: relative;
+}
+
+.portfolio-comparison-chart__legend {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--color-gray-700);
+}
+
+.legend-color {
+  width: 20px;
+  height: 3px;
+  border-radius: 2px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .portfolio-comparison-chart__container {
+    height: 300px;
+    padding: 1rem;
+  }
+  
+  .portfolio-comparison-chart__legend {
+    gap: 1rem;
+  }
+  
+  .legend-item {
+    font-size: 0.75rem;
+  }
+}

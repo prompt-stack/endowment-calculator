@@ -1,0 +1,46 @@
+{# 
+  @template templates/partials/comparison.html
+  @type partial
+  @htmx true
+#}
+<div style="overflow-x: auto;">
+    <table class="comparison-table">
+        <thead>
+            <tr>
+                <th>Portfolio</th>
+                <th>Success Rate</th>
+                <th>Median Final Balance</th>
+                <th>Risk Level</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for scenario in scenarios %}
+            <tr>
+                <td>
+                    <div style="font-weight: 500;">{{ scenario.portfolio.name }}</div>
+                    <div style="font-size: 0.875rem; color: var(--color-gray-500);">{{ "{:.1%}".format(scenario.portfolio.expected_return) }} expected return</div>
+                </td>
+                <td>
+                    <div style="font-weight: 600; 
+                        {% if scenario.success_rate >= 0.7 %}color: var(--color-success);
+                        {% elif scenario.success_rate >= 0.5 %}color: var(--color-warning);
+                        {% else %}color: var(--color-danger);{% endif %}">
+                        {{ "{:.1%}".format(scenario.success_rate) }}
+                    </div>
+                </td>
+                <td style="font-size: 0.875rem;">
+                    ${{ "{:,.0f}".format(scenario.median_final) }}
+                </td>
+                <td>
+                    <span class="badge 
+                        {% if scenario.portfolio.risk_level == 'Conservative' %}badge-info
+                        {% elif scenario.portfolio.risk_level == 'Aggressive' %}badge-warning
+                        {% else %}badge-success{% endif %}">
+                        {{ scenario.portfolio.risk_level }}
+                    </span>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>

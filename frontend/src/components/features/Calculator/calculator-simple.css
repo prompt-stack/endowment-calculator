@@ -1,0 +1,115 @@
+/**
+ * @fileoverview Simple, functional calculator styles
+ * @component Calculator
+ * @theme Clean and Functional
+ */
+
+/* Import base luxury styles for layout */
+@import './calculator-luxury.css';
+
+/* Override complex animations and effects */
+.calculator__year-btn {
+  transition: all 150ms ease;
+  
+  &::before {
+    display: none;
+  }
+  
+  &:hover {
+    background-color: var(--color-charcoal);
+    color: var(--color-pure);
+    border-color: var(--color-charcoal);
+  }
+}
+
+/* Simplified submit button */
+.calculator__submit .btn--primary {
+  position: relative;
+  
+  &::after {
+    display: none;
+  }
+  
+  &:hover {
+    background-color: #2d2d2d;
+  }
+}
+
+/* Simple focus states */
+.calculator__field:focus-within .input__label {
+  color: var(--color-charcoal);
+}
+
+/* Clean input styling */
+.calculator__field .input {
+  transition: border-color 150ms ease;
+  
+  &:focus {
+    background-color: var(--color-pure);
+    border-color: var(--color-charcoal);
+    box-shadow: 0 0 0 2px rgba(26, 26, 26, 0.1);
+  }
+}
+
+
+/* Simple radio and checkbox styles */
+.calculator__radio input[type="radio"],
+.calculator__checkbox input[type="checkbox"] {
+  transition: border-color 150ms ease;
+  
+  &:hover {
+    border-color: var(--color-charcoal);
+  }
+}
+
+/* Info box for comprehensive analysis note */
+.calculator__info-box {
+  background: var(--color-ivory);
+  border: 1px solid var(--color-gold);
+  border-radius: 8px;
+  padding: 1.25rem;
+  margin-top: 1rem;
+}
+
+.calculator__info-box h4 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-charcoal);
+  margin: 0 0 0.5rem 0;
+}
+
+.calculator__info-box p {
+  font-size: 0.875rem;
+  color: var(--color-gray-700);
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Portfolio sections */
+.calculator__portfolio-section {
+  margin-top: 3rem;
+  padding-top: 3rem;
+  border-top: 2px solid var(--color-gray-200);
+}
+
+.calculator__portfolio-section:first-of-type {
+  border-top: none;
+  margin-top: 2rem;
+  padding-top: 0;
+}
+
+.calculator__portfolio-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: var(--color-charcoal);
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+/* Full width charts */
+.calculator__chart-full {
+  margin-top: 2rem;
+  width: 100%;
+}

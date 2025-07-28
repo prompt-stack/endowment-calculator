@@ -1,0 +1,49 @@
+/**
+ * @fileoverview Styles for risk vs return scatter plot
+ * @layer composed
+ * @status stable
+ */
+
+.risk-return-chart {
+  margin-top: 2rem;
+}
+
+.risk-return-chart__title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--color-gray-900);
+  margin-bottom: 1.5rem;
+}
+
+.risk-return-chart__container {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  height: 400px;
+  position: relative;
+}
+
+.risk-return-chart__insight {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background: var(--color-gray-50);
+  border-radius: 8px;
+  border-left: 4px solid var(--color-gold);
+}
+
+.risk-return-chart__insight p {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--color-gray-700);
+  line-height: 1.5;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .risk-return-chart__container {
+    height: 300px;
+    padding: 1rem;
+  }
+}

@@ -1,0 +1,85 @@
+/**
+ * @fileoverview Results card component styles
+ * @component ResultsCard
+ * @layer composed
+ */
+
+.results-card {
+  background-color: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+  transition: all 0.15s ease-in-out;
+}
+
+.results-card:hover {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.results-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.results-card__title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #1a202c;
+}
+
+.results-card__icon {
+  font-size: 1.5rem;
+}
+
+.results-card__content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.results-card__value {
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.results-card__label {
+  font-size: 0.875rem;
+  color: #6b7280;
+  line-height: 1.25;
+}
+
+/* Variant styles */
+.results-card--primary .results-card__value {
+  color: #2563eb;
+}
+
+.results-card--success {
+  border-color: #059669;
+  background-color: #f0fdf4;
+}
+
+.results-card--success .results-card__value {
+  color: #059669;
+}
+
+.results-card--warning {
+  border-color: #f59e0b;
+  background-color: #fffbeb;
+}
+
+.results-card--warning .results-card__value {
+  color: #f59e0b;
+}
+
+.results-card--danger {
+  border-color: #dc2626;
+  background-color: #fef2f2;
+}
+
+.results-card--danger .results-card__value {
+  color: #dc2626;
+}

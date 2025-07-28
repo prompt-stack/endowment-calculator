@@ -1,0 +1,214 @@
+/**
+ * @fileoverview Styles for portfolio comparison table
+ * @layer composed
+ * @status stable
+ */
+
+.portfolio-comparison {
+  margin-top: 0;
+}
+
+.portfolio-comparison__title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--color-gray-900);
+  margin-bottom: 1.5rem;
+}
+
+.portfolio-comparison__table-wrapper {
+  overflow-x: auto;
+  margin-bottom: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.portfolio-comparison__table {
+  width: 100%;
+  background: white;
+  border-collapse: collapse;
+}
+
+.portfolio-comparison__table thead {
+  background: var(--color-gray-50);
+  border-bottom: 2px solid var(--color-gold);
+}
+
+.portfolio-comparison__table th {
+  text-align: left;
+  padding: 1rem 1.5rem;
+  font-weight: 600;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-gray-700);
+}
+
+.portfolio-comparison__table tbody tr {
+  border-bottom: 1px solid var(--color-gray-100);
+  transition: background-color 0.2s ease;
+}
+
+.portfolio-comparison__table tbody tr:hover {
+  background-color: var(--color-gray-50);
+}
+
+.portfolio-comparison__table tbody tr.selected {
+  background-color: rgba(212, 175, 55, 0.1);
+  border-left: 3px solid var(--color-gold);
+}
+
+.portfolio-comparison__table td {
+  padding: 1.25rem 1.5rem;
+}
+
+.portfolio-comparison__name {
+  font-weight: 500;
+  color: var(--color-gray-900);
+}
+
+.portfolio-comparison__success-rate {
+  font-weight: 600;
+  font-size: 1.125rem;
+}
+
+.portfolio-comparison__success-rate.success {
+  color: var(--color-success);
+}
+
+.portfolio-comparison__success-rate.warning {
+  color: var(--color-warning);
+}
+
+.portfolio-comparison__success-rate.danger {
+  color: var(--color-danger);
+}
+
+.portfolio-comparison__balance {
+  font-weight: 500;
+  color: var(--color-gray-900);
+}
+
+.portfolio-comparison__return {
+  font-weight: 500;
+  color: var(--color-gray-700);
+}
+
+.portfolio-comparison__risk {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.portfolio-comparison__risk.risk-low {
+  background-color: rgba(34, 197, 94, 0.1);
+  color: var(--color-success);
+}
+
+.portfolio-comparison__risk.risk-medium {
+  background-color: rgba(251, 191, 36, 0.1);
+  color: var(--color-warning);
+}
+
+.portfolio-comparison__risk.risk-high {
+  background-color: rgba(239, 68, 68, 0.1);
+  color: var(--color-danger);
+}
+
+.portfolio-comparison__allocation {
+  display: flex;
+  gap: 1rem;
+  font-size: 0.875rem;
+}
+
+.allocation-stocks {
+  color: var(--color-primary);
+  font-weight: 500;
+}
+
+.allocation-bonds {
+  color: var(--color-secondary);
+  font-weight: 500;
+}
+
+.portfolio-comparison__insights {
+  background: var(--color-gray-50);
+  padding: 1.5rem;
+  border-radius: 12px;
+  border-left: 4px solid var(--color-gold);
+}
+
+.portfolio-comparison__insights h4 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.125rem;
+  margin-bottom: 1rem;
+  color: var(--color-gray-900);
+}
+
+.portfolio-comparison__insights ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.portfolio-comparison__insights li {
+  position: relative;
+  padding-left: 1.5rem;
+  margin-bottom: 0.75rem;
+  color: var(--color-gray-700);
+  line-height: 1.5;
+}
+
+.portfolio-comparison__insights li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: var(--color-gold);
+  font-weight: bold;
+}
+
+.portfolio-comparison__risk-return {
+  display: grid;
+  gap: 1rem;
+}
+
+.risk-return-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--color-gray-200);
+}
+
+.risk-return-item:last-child {
+  border-bottom: none;
+}
+
+.risk-return-label {
+  font-size: 0.875rem;
+  color: var(--color-gray-600);
+}
+
+.risk-return-value {
+  font-weight: 600;
+  color: var(--color-gray-900);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .portfolio-comparison__table {
+    font-size: 0.875rem;
+  }
+  
+  .portfolio-comparison__table th,
+  .portfolio-comparison__table td {
+    padding: 0.75rem;
+  }
+  
+  .portfolio-comparison__allocation {
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+}

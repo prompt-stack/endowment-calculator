@@ -1,0 +1,65 @@
+# @dockerignore .dockerignore
+# @purpose Exclude files from Docker build context for backend
+# @context_type backend
+# @layer infrastructure
+# @llm-read true
+# @llm-write full-edit
+# @llm-role build-optimization
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+# lib/  # Commented out - we need our lib folder for the app
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environments
+venv/
+env/
+ENV/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Git
+.git/
+.gitignore
+
+# Docker
+Dockerfile*
+docker-compose*.yml
+.dockerignore
+
+# Node.js (for frontend folder)
+frontend/node_modules/
+frontend/dist/
+frontend/.env*

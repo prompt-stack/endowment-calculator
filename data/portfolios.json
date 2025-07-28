@@ -1,0 +1,39 @@
+{
+  "presets": {
+    "conservative": {
+      "name": "Conservative (50/50)",
+      "stocks_percentage": 50,
+      "bonds_percentage": 50,
+      "expected_return": 0.075,
+      "std_deviation": 0.125,
+      "description": "Balanced approach suitable for risk-averse organizations"
+    },
+    "balanced": {
+      "name": "Balanced (70/30)",
+      "stocks_percentage": 70,
+      "bonds_percentage": 30,
+      "expected_return": 0.085,
+      "std_deviation": 0.15,
+      "description": "Moderate growth with controlled risk - recommended for most nonprofits"
+    },
+    "aggressive": {
+      "name": "Aggressive (90/10)",
+      "stocks_percentage": 90,
+      "bonds_percentage": 10,
+      "expected_return": 0.095,
+      "std_deviation": 0.18,
+      "description": "Higher growth potential with increased volatility"
+    }
+  },
+  "historical_data": {
+    "stocks": {
+      "annual_return": 0.10,
+      "std_deviation": 0.20
+    },
+    "bonds": {
+      "annual_return": 0.05,
+      "std_deviation": 0.05
+    },
+    "correlation": 0.1
+  }
+}

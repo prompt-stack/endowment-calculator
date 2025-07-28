@@ -1,0 +1,72 @@
+/**
+ * @fileoverview Global CSS reset and base styles
+ * @layer base
+ */
+
+* {
+  box-sizing: border-box;
+}
+
+/* Prevent layout shifts */
+html {
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #f8fafc;
+  color: #1a202c;
+}
+
+/* Stable body layout */
+body {
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#root {
+  width: 100%;
+  height: 100%;
+}
+
+/* Reset default button styles */
+button {
+  border: none;
+  background: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  cursor: pointer;
+}
+
+/* Reset default form styles */
+input, select, textarea {
+  font: inherit;
+  margin: 0;
+}
+
+/* Reset headings */
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  font-weight: 600;
+}
+
+/* Reset paragraphs */
+p {
+  margin: 0;
+}

@@ -1,0 +1,742 @@
+/**
+ * @file static/css/calculator.css
+ * @layer feature
+ * @purpose Nonprofit calculator specific styles and financial charts
+ */
+
+/* Calculator Layout */
+.calculator-grid {
+    display: grid;
+    grid-template-columns: 380px 1fr;
+    gap: 0;
+    height: 100%;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.calculator-sidebar {
+    height: 100%;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    background: var(--surface-muted);
+    border-right: 1px solid var(--border-color-light);
+    position: relative;
+}
+
+.calculator-sidebar::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 1px;
+    height: 100%;
+    background: linear-gradient(180deg, 
+        rgba(255,255,255,0) 0%, 
+        rgba(255,255,255,0.8) 50%, 
+        rgba(255,255,255,0) 100%);
+    pointer-events: none;
+}
+
+.calculator-sidebar .card {
+    background: var(--surface-primary);
+    border: 1px solid var(--border-color-light);
+    border-radius: var(--border-radius);
+    margin: var(--space-lg);
+    margin-bottom: var(--space-md);
+    padding: var(--space-xl);
+    flex-shrink: 0;
+    transition: border-color var(--transition-fast);
+}
+
+.calculator-sidebar .card:hover {
+    border-color: var(--color-gray-300);
+}
+
+.calculator-sidebar .card:first-child {
+    margin-top: var(--space-lg);
+}
+
+.calculator-sidebar .card:last-child {
+    margin-bottom: var(--space-lg);
+}
+
+/* Premium Form Styling */
+.calculator-sidebar h2 {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-gray-900);
+    margin-bottom: var(--space-lg);
+    letter-spacing: -0.025em;
+    position: relative;
+}
+
+.calculator-sidebar h2::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 24px;
+    height: 2px;
+    background: var(--surface-accent);
+    border-radius: 1px;
+}
+
+.calculator-sidebar .form-group {
+    margin-bottom: var(--space-lg);
+}
+
+.calculator-sidebar .form-group:last-of-type {
+    margin-bottom: var(--space-md);
+}
+
+.calculator-sidebar .form-label {
+    display: block;
+    font-family: var(--font-sans);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--color-gray-700);
+    margin-bottom: var(--space-md);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.calculator-sidebar .range-value {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    margin-bottom: var(--space-sm);
+    letter-spacing: -0.02em;
+}
+
+.calculator-sidebar .range-slider {
+    width: 100%;
+    height: 6px;
+    border-radius: 3px;
+    background: var(--color-gray-200);
+    outline: none;
+    transition: all var(--transition-base);
+    margin: var(--space-lg) 0;
+}
+
+.calculator-sidebar .range-slider::-webkit-slider-thumb {
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--surface-accent);
+    cursor: pointer;
+    box-shadow: var(--shadow-md);
+    transition: all var(--transition-base);
+}
+
+.calculator-sidebar .range-slider::-webkit-slider-thumb:hover {
+    transform: scale(1.1);
+    box-shadow: var(--shadow-lg);
+}
+
+.calculator-sidebar .radio-group {
+    display: grid;
+    gap: var(--space-sm);
+}
+
+.calculator-sidebar .radio-option {
+    position: relative;
+    padding: var(--space-md) var(--space-lg);
+    background: var(--surface-primary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-sm);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.calculator-sidebar .radio-option::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 2px;
+    height: 100%;
+    background: var(--color-primary);
+    transform: scaleY(0);
+    transition: transform var(--transition-fast);
+}
+
+.calculator-sidebar .radio-option:hover {
+    border-color: var(--color-gray-300);
+    background: var(--color-gray-50);
+}
+
+.calculator-sidebar .radio-option input:checked + span,
+.calculator-sidebar .radio-option:has(input:checked) {
+    background: var(--color-gray-50);
+    border-color: var(--color-primary);
+}
+
+.calculator-sidebar .radio-option:has(input:checked)::before {
+    transform: scaleY(1);
+}
+
+.calculator-sidebar .radio-option input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.calculator-sidebar .form-input {
+    width: 100%;
+    padding: var(--space-lg);
+    border: 1.5px solid var(--border-color);
+    border-radius: var(--border-radius);
+    background: var(--surface-primary);
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: var(--color-gray-900);
+    transition: all var(--transition-base);
+}
+
+.calculator-sidebar .form-input:focus {
+    outline: none;
+    border-color: var(--color-primary-soft);
+    box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.1);
+    background: var(--surface-primary);
+}
+
+.calculator-sidebar .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-sm) var(--space-lg);
+    border: none;
+    border-radius: var(--border-radius-sm);
+    font-family: var(--font-sans);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    text-align: center;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    position: relative;
+    white-space: nowrap;
+}
+
+.calculator-sidebar .btn-primary {
+    background: var(--color-primary);
+    color: white;
+    border: 1px solid transparent;
+}
+
+.calculator-sidebar .btn-primary:hover {
+    background: var(--color-primary-light);
+    transform: translateY(-1px);
+}
+
+.calculator-sidebar .btn-secondary {
+    background: transparent;
+    color: var(--color-gray-600);
+    border: 1px solid var(--color-gray-300);
+}
+
+.calculator-sidebar .btn-secondary:hover {
+    background: var(--color-gray-50);
+    border-color: var(--color-gray-400);
+    color: var(--color-gray-700);
+}
+
+.calculator-sidebar .btn-full {
+    width: 100%;
+}
+
+/* Elegant Accordion Styling */
+.accordion-section {
+    border: 1px solid var(--border-color-light);
+    border-radius: var(--border-radius-sm);
+    margin-bottom: var(--space-md) !important;
+    overflow: hidden;
+    transition: all var(--transition-fast);
+}
+
+.accordion-section:hover {
+    border-color: var(--color-gray-300);
+}
+
+.accordion-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-md);
+    cursor: pointer;
+    background: var(--color-gray-50);
+    transition: background var(--transition-fast);
+    user-select: none;
+}
+
+.accordion-header:hover {
+    background: var(--color-gray-100);
+}
+
+.accordion-header .form-label {
+    margin: 0;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--color-gray-700);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.accordion-icon {
+    width: 16px;
+    height: 16px;
+    color: var(--color-gray-500);
+    transition: transform var(--transition-fast);
+    flex-shrink: 0;
+}
+
+.accordion-icon.rotate-180 {
+    transform: rotate(180deg);
+}
+
+.accordion-content {
+    padding: var(--space-lg);
+    background: var(--surface-primary);
+    border-top: 1px solid var(--border-color-light);
+}
+
+/* Override form-group margin inside accordions */
+.accordion-section .form-group {
+    margin-bottom: 0;
+}
+
+/* Sidebar Footer */
+.sidebar-footer {
+    margin-top: auto;
+    padding: var(--space-lg);
+    background: var(--color-gray-800);
+    color: var(--color-gray-300);
+    border-top: 1px solid var(--color-gray-700);
+}
+
+.sidebar-footer-content p {
+    margin: 0;
+    font-size: 0.75rem;
+    line-height: 1.4;
+    text-align: center;
+}
+
+.sidebar-footer-content p:first-child {
+    margin-bottom: var(--space-xs);
+    color: var(--color-gray-400);
+}
+
+.sidebar-footer-content strong {
+    color: var(--color-gray-200);
+    font-weight: 600;
+}
+
+/* Compact withdrawal method toggle buttons */
+.calculator-sidebar .form-group [style*="display: flex; gap: 0.5rem"] .btn {
+    padding: var(--space-xs) var(--space-md);
+    font-size: 0.75rem;
+    font-weight: 500;
+    border-radius: var(--border-radius-sm);
+    letter-spacing: 0.01em;
+}
+
+.calculator-sidebar .form-group [style*="display: flex; gap: 0.5rem"] .btn-primary {
+    background: var(--color-primary);
+    color: white;
+    border: 1px solid var(--color-primary);
+}
+
+.calculator-sidebar .form-group [style*="display: flex; gap: 0.5rem"] .btn-secondary {
+    background: transparent;
+    color: var(--color-gray-500);
+    border: 1px solid var(--color-gray-200);
+}
+
+.calculator-sidebar .form-group [style*="display: flex; gap: 0.5rem"] .btn-secondary:hover {
+    background: var(--color-gray-50);
+    color: var(--color-gray-600);
+    border-color: var(--color-gray-300);
+}
+
+
+.calculator-results {
+    height: 100%;
+    overflow-y: auto;
+    background: var(--surface-primary);
+    padding: var(--space-2xl);
+}
+
+/* Enhanced scrollbar for results */
+.calculator-results::-webkit-scrollbar {
+    width: 6px;
+}
+
+.calculator-results::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.calculator-results::-webkit-scrollbar-thumb {
+    background: var(--color-gray-300);
+    border-radius: 3px;
+    transition: background var(--transition-base);
+}
+
+.calculator-results::-webkit-scrollbar-thumb:hover {
+    background: var(--color-gray-400);
+}
+
+/* Results cards styling to perfectly match sidebar */
+.calculator-results .card {
+    background: var(--surface-primary);
+    border: 1px solid var(--border-color-light);
+    border-radius: var(--border-radius);
+    padding: var(--space-xl);
+    margin-bottom: var(--space-lg);
+    transition: border-color var(--transition-fast);
+}
+
+.calculator-results .card:hover {
+    border-color: var(--color-gray-300);
+}
+
+.calculator-results .card:last-child {
+    margin-bottom: 0;
+}
+
+/* Match sidebar card typography */
+.calculator-results .card h3 {
+    font-family: var(--font-display);
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--color-gray-900);
+    margin-bottom: var(--space-md);
+    letter-spacing: -0.025em;
+}
+
+.calculator-results .card h4 {
+    font-family: var(--font-sans);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--color-gray-700);
+    margin-bottom: var(--space-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* Professional report card specific styling */
+.calculator-results .card[style*="background: var(--surface-muted)"] {
+    background: var(--color-gray-50) !important;
+    border: 1px solid var(--border-color-light);
+}
+
+.calculator-results .card[style*="background: var(--surface-muted)"]:hover {
+    background: var(--color-gray-100) !important;
+}
+
+/* Button styles for results area */
+.calculator-results .btn-primary:hover {
+    background: var(--color-primary-light);
+    transform: translateY(-1px);
+}
+
+.calculator-results .btn-secondary:hover {
+    background: var(--color-gray-50);
+    border-color: var(--color-gray-400);
+    color: var(--color-gray-700);
+}
+
+/* Enhanced Results Display */
+.result-hero {
+    text-align: center;
+    padding: var(--space-2xl) var(--space-xl);
+}
+
+.success-rate {
+    font-family: var(--font-display);
+    font-size: 3.5rem;
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: var(--space-sm);
+    letter-spacing: -0.02em;
+}
+
+.success-rate--high {
+    color: var(--color-success);
+}
+
+.success-rate--medium {
+    color: var(--color-warning);
+}
+
+.success-rate--low {
+    color: var(--color-danger);
+}
+
+.success-description {
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--color-gray-600);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* Metrics Grid */
+.metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-md);
+    margin-top: var(--space-xl);
+}
+
+.metric-card {
+    background: var(--color-gray-50);
+    padding: var(--space-md);
+    border-radius: var(--border-radius);
+    text-align: center;
+}
+
+.metric-label {
+    font-size: 0.75rem;
+    color: var(--color-gray-500);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: var(--space-xs);
+}
+
+.metric-value {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--color-gray-900);
+}
+
+.metric-subvalue {
+    font-size: 0.875rem;
+    color: var(--color-gray-500);
+}
+
+/* Enhanced Financial Chart Styles */
+.chart-container {
+    background: var(--surface-primary);
+    border: 1px solid var(--border-color-light);
+    border-radius: var(--border-radius);
+    padding: var(--space-2xl);
+    margin: var(--space-xl) 0;
+    transition: border-color var(--transition-fast);
+}
+
+.chart-container:hover {
+    border-color: var(--color-gray-300);
+}
+
+/* Ensure canvas is interactive */
+canvas {
+    cursor: crosshair !important;
+    user-select: none;
+}
+
+.chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-md);
+}
+
+.chart-title {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-gray-700);
+}
+
+.chart-canvas {
+    position: relative;
+    height: 300px;
+}
+
+/* Monte Carlo Visualization */
+.probability-chart {
+    position: relative;
+    height: 200px;
+    margin-top: var(--space-lg);
+}
+
+.probability-range {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background: linear-gradient(to top, 
+        rgba(251, 191, 36, 0.1) 0%, 
+        rgba(251, 191, 36, 0.3) 100%);
+    border-radius: var(--border-radius);
+}
+
+.probability-line {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--color-danger);
+}
+
+/* Scenario Comparison Table */
+.comparison-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+}
+
+.comparison-table th {
+    text-align: left;
+    padding: var(--space-sm) var(--space-md);
+    background: var(--color-gray-50);
+    font-weight: 500;
+    color: var(--color-gray-600);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.75rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.comparison-table td {
+    padding: var(--space-md);
+    border-bottom: 1px solid var(--color-gray-100);
+}
+
+.comparison-table tr:hover {
+    background: var(--color-gray-50);
+}
+
+/* Range Slider Styling */
+.range-slider {
+    width: 100%;
+    margin: var(--space-sm) 0;
+}
+
+.range-value {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--color-gray-900);
+    margin-bottom: var(--space-xs);
+}
+
+/* Subtle reveal animation - more understated */
+.calculator-sidebar .form-group {
+    opacity: 0;
+    animation: fadeInUp 0.3s ease-out forwards;
+}
+
+.calculator-sidebar .form-group:nth-child(1) { animation-delay: 0.05s; }
+.calculator-sidebar .form-group:nth-child(2) { animation-delay: 0.1s; }
+.calculator-sidebar .form-group:nth-child(3) { animation-delay: 0.15s; }
+.calculator-sidebar .form-group:nth-child(4) { animation-delay: 0.2s; }
+.calculator-sidebar .form-group:nth-child(5) { animation-delay: 0.25s; }
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Enhanced scrollbar styling */
+.calculator-sidebar::-webkit-scrollbar {
+    width: 6px;
+}
+
+.calculator-sidebar::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.calculator-sidebar::-webkit-scrollbar-thumb {
+    background: var(--color-gray-300);
+    border-radius: 3px;
+    transition: background var(--transition-base);
+}
+
+.calculator-sidebar::-webkit-scrollbar-thumb:hover {
+    background: var(--color-gray-400);
+}
+
+/* Premium focus states */
+.calculator-sidebar .form-input:focus,
+.calculator-sidebar .range-slider:focus {
+    transform: scale(1.005);
+}
+
+/* Subtle interaction states */
+.calculator-sidebar .btn:active {
+    transform: translateY(0px) scale(0.99);
+}
+
+.calculator-sidebar .btn:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(26, 54, 93, 0.2);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .calculator-grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto 1fr;
+        gap: 0;
+        height: 100%;
+    }
+    
+    .calculator-sidebar {
+        height: auto;
+        max-height: 45vh;
+        overflow-y: auto;
+        border-right: none;
+        border-bottom: 1px solid var(--border-color-light);
+    }
+    
+    .calculator-sidebar::before {
+        width: 100%;
+        height: 1px;
+        top: auto;
+        bottom: 0;
+        right: auto;
+        left: 0;
+        background: linear-gradient(90deg, 
+            rgba(255,255,255,0) 0%, 
+            rgba(255,255,255,0.8) 50%, 
+            rgba(255,255,255,0) 100%);
+    }
+    
+    .calculator-sidebar .card {
+        margin: var(--space-lg);
+    }
+    
+    .calculator-sidebar .card:first-child {
+        margin-top: var(--space-lg);
+    }
+    
+    .calculator-sidebar .card:last-child {
+        margin-bottom: var(--space-lg);
+    }
+    
+    .sidebar-footer {
+        display: none;
+    }
+    
+    .calculator-results {
+        height: auto;
+        flex: 1;
+        overflow-y: auto;
+        padding: var(--space-lg);
+    }
+    
+    .metrics-grid {
+        grid-template-columns: 1fr;
+    }
+}

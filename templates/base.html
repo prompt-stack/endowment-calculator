@@ -1,0 +1,255 @@
+{# 
+  @template templates/base.html
+  @type layout
+  @htmx true
+  @alpine true
+#}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EndowmentIQ - Data-Driven Nonprofit Endowment Analysis</title>
+    
+    <!-- Modular CSS following grammar-ops patterns -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/components.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/calculator.css') }}">
+    
+    <!-- HTMX for interactivity -->
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+    
+    <!-- Alpine.js for lightweight reactivity -->
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    
+    <!-- Chart.js for financial visualizations -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.js"></script>
+    
+    <!-- Font Awesome for professional icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Calculator utilities -->
+    <script src="{{ url_for('static', filename='js/calculator.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/input-formatter.js') }}"></script>
+    
+    <!-- HTMX indicator styles -->
+    <style>
+        .htmx-indicator {
+            display: none;
+        }
+        .htmx-request .htmx-indicator {
+            display: inline-block;
+        }
+        
+        /* Header navigation styling */
+        header nav a:hover {
+            color: var(--color-primary) !important;
+        }
+        
+        /* Active page styling */
+        header nav a.active {
+            color: var(--color-primary) !important;
+            font-weight: 600;
+        }
+        
+        /* Fix scrolling issues */
+        html {
+            height: 100%;
+            overflow-y: auto;
+        }
+        
+        body {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+        }
+        
+        main {
+            flex: 1;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+        
+        /* Toast Notification Styles */
+        .toast-container {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            z-index: 10000;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            pointer-events: none;
+        }
+        
+        .toast {
+            background: var(--surface-primary);
+            border: 1px solid var(--border-color-light);
+            border-radius: var(--border-radius);
+            padding: var(--space-lg);
+            box-shadow: var(--shadow-lg);
+            min-width: 320px;
+            max-width: 400px;
+            opacity: 0;
+            transform: translateX(100%);
+            transition: all 0.3s ease;
+            pointer-events: auto;
+        }
+        
+        .toast.show {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .toast-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: var(--space-sm);
+        }
+        
+        .toast-icon {
+            margin-right: var(--space-md);
+            font-size: 1.25rem;
+        }
+        
+        .toast-title {
+            font-weight: 600;
+            color: var(--color-primary);
+            margin: 0;
+        }
+        
+        .toast-body {
+            color: var(--color-gray-600);
+            font-size: 0.875rem;
+            line-height: 1.5;
+            margin: 0;
+        }
+        
+        .toast-features {
+            margin-top: var(--space-md);
+            padding-top: var(--space-md);
+            border-top: 1px solid var(--border-color-light);
+        }
+        
+        .toast-feature {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+            font-size: 0.8125rem;
+            color: var(--color-gray-600);
+        }
+        
+        .toast-feature:last-child {
+            margin-bottom: 0;
+        }
+        
+        .toast-feature i {
+            color: var(--color-success);
+            margin-right: 0.5rem;
+            width: 12px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header style="background: white; border-bottom: 1px solid var(--border-color); padding: 1rem var(--space-lg); flex-shrink: 0;">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div style="display: flex; align-items: center; gap: 2rem;">
+                <a href="/" style="text-decoration: none; color: var(--color-primary);">
+                    <h1 style="font-size: 1.25rem; font-weight: 600; margin: 0;">Nonprofit Spending Calculator</h1>
+                </a>
+                <nav style="display: flex; gap: 1.5rem;">
+                    <a href="/" class="{% if current_page == 'calculator' %}active{% endif %}" style="color: var(--color-gray-600); text-decoration: none; font-size: 0.875rem; transition: color 0.2s;">
+                        <i class="fas fa-calculator" style="margin-right: 0.5rem;"></i>Calculator
+                    </a>
+                    <a href="/report-preview" class="{% if current_page == 'preview' %}active{% endif %}" style="color: var(--color-gray-600); text-decoration: none; font-size: 0.875rem; transition: color 0.2s;">
+                        <i class="fas fa-globe" style="margin-right: 0.5rem;"></i>Web Report
+                    </a>
+                    <a href="/showcase" class="{% if current_page == 'showcase' %}active{% endif %}" style="color: var(--color-gray-600); text-decoration: none; font-size: 0.875rem; transition: color 0.2s;">
+                        <i class="fas fa-star" style="margin-right: 0.5rem;"></i>Features
+                    </a>
+                </nav>
+            </div>
+            <div style="font-size: 0.875rem; color: var(--color-gray-600);">
+                Professional Monte Carlo Analysis for Endowments
+            </div>
+        </div>
+    </header>
+
+    <!-- Main content -->
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+        <div class="footer-content">
+            <div class="footer-left">
+                <p class="footer-text">
+                    Built for nonprofit organizations to make data-driven spending decisions
+                </p>
+            </div>
+            <div class="footer-right">
+                <p class="footer-text">
+                    Powered by <strong>Zenith Wealth Partners</strong>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast Container -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <!-- Toast JavaScript -->
+    <script>
+        function showToast(title, message, icon, features = []) {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            
+            let featuresHtml = '';
+            if (features.length > 0) {
+                featuresHtml = `
+                    <div class="toast-features">
+                        ${features.map(feature => `
+                            <div class="toast-feature">
+                                <i class="fas fa-check"></i>
+                                ${feature}
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+            }
+            
+            toast.innerHTML = `
+                <div class="toast-header">
+                    <i class="${icon} toast-icon" style="color: var(--color-primary);"></i>
+                    <h4 class="toast-title">${title}</h4>
+                </div>
+                <p class="toast-body">${message}</p>
+                ${featuresHtml}
+            `;
+            
+            container.appendChild(toast);
+            
+            // Trigger animation
+            setTimeout(() => {
+                toast.classList.add('show');
+            }, 100);
+            
+            // Auto remove after 4 seconds
+            setTimeout(() => {
+                toast.classList.remove('show');
+                setTimeout(() => {
+                    if (container.contains(toast)) {
+                        container.removeChild(toast);
+                    }
+                }, 300);
+            }, 4000);
+        }
+    </script>
+</body>
+</html>
