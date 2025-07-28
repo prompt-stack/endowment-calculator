@@ -6,6 +6,11 @@
 
 .portfolio-comparison-chart {
   margin-top: 2rem;
+  background: #ffffff;
+  border: 1px solid rgba(26, 35, 50, 0.08);
+  border-radius: 8px;
+  padding: 2rem;
+  box-shadow: 0 2px 8px rgba(26, 35, 50, 0.04);
 }
 
 .portfolio-comparison-chart__title {
@@ -18,8 +23,13 @@
 }
 
 .portfolio-comparison-chart__container {
-  height: 400px;
+  height: 350px;
   position: relative;
+}
+
+.portfolio-comparison-chart__container canvas {
+  width: 100% !important;
+  height: 320px !important;
 }
 
 .portfolio-comparison-chart__legend {

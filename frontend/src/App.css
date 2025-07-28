@@ -25,6 +25,11 @@
   display: flex;
 }
 
+.app__main--full {
+  display: block;
+  overflow: auto;
+}
+
 .app > .footer {
   flex-shrink: 0;
 }

@@ -5,6 +5,7 @@
 
 /* Import CSS variables */
 @import './styles/variables.css';
+@import './styles/chart-theme.css';
 
 /* Base reset */
 *, *::before, *::after {
@@ -26,13 +27,11 @@ html, body {
   padding: 0;
   width: 100%;
   height: 100%;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #f8fafc;
-  color: #1a202c;
+  background: linear-gradient(135deg, #fdfcfb 0%, #f8f7f6 100%);
+  color: var(--color-primary);
 }
 
 /* Stable body layout */

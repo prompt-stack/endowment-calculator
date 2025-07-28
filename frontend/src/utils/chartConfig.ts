@@ -31,19 +31,19 @@ ChartJS.register(
   Filler
 );
 
-// Chart color constants
+// Minimal luxury color palette
 export const CHART_COLORS = {
   conservative: '#059669',
   balanced: '#1a2332',
-  aggressive: '#2b6cb0',
+  aggressive: '#6b7280',
   positive: '#059669',
   negative: '#dc2626',
   neutral: '#6b7280',
-  percentile90: '#059669',
-  percentile50: '#1a2332',
-  percentile10: '#dc2626',
-  primary: '#2563eb',
-  gold: '#f59e0b',
+  percentile90: '#1a2332',
+  percentile50: '#6b7280',
+  percentile10: '#9ca3af',
+  primary: '#1a2332',
+  gold: '#d4af37',
 };
 
 // Common chart options
@@ -153,21 +153,142 @@ export const formatPercentage = (value: number): string => {
   return `${(value * 100).toFixed(1)}%`;
 };
 
-// Luxury chart options for compatibility
-export const LUXURY_CHART_OPTIONS = DEFAULT_CHART_OPTIONS;
+// Luxury chart options with enhanced styling
+export const LUXURY_CHART_OPTIONS: ChartOptions<'line'> = {
+  ...DEFAULT_CHART_OPTIONS,
+  plugins: {
+    ...DEFAULT_CHART_OPTIONS.plugins,
+    legend: {
+      position: 'top' as const,
+      labels: {
+        usePointStyle: true,
+        padding: 20,
+        font: {
+          family: 'system-ui, -apple-system, sans-serif',
+          size: 14,
+          weight: 'normal' as const,
+        },
+        color: '#1a2332',
+      },
+    },
+    tooltip: {
+      ...DEFAULT_CHART_OPTIONS.plugins?.tooltip,
+      backgroundColor: 'rgba(26, 35, 50, 0.95)',
+      titleFont: {
+        family: 'Georgia, serif',
+        size: 16,
+        weight: 'bold' as const,
+      },
+      bodyFont: {
+        family: 'Georgia, serif',
+        size: 14,
+      },
+      padding: 16,
+      cornerRadius: 8,
+      displayColors: true,
+    },
+  },
+  scales: {
+    x: {
+      grid: {
+        display: true,
+        color: 'rgba(26, 35, 50, 0.05)',
+        lineWidth: 1,
+      },
+      title: {
+        display: true,
+        text: 'Years',
+        font: {
+          family: 'system-ui, -apple-system, sans-serif',
+          size: 16,
+          weight: 'normal' as const,
+        },
+        color: '#1a2332',
+      },
+      ticks: {
+        font: {
+          family: 'system-ui, -apple-system, sans-serif',
+          size: 12,
+        },
+        color: '#525252',
+      },
+    },
+    y: {
+      grid: {
+        display: true,
+        color: 'rgba(26, 35, 50, 0.08)',
+        lineWidth: 1,
+      },
+      title: {
+        display: true,
+        text: 'Portfolio Value',
+        font: {
+          family: 'system-ui, -apple-system, sans-serif',
+          size: 16,
+          weight: 'normal' as const,
+        },
+        color: '#1a2332',
+      },
+      ticks: {
+        font: {
+          family: 'system-ui, -apple-system, sans-serif',
+          size: 12,
+        },
+        color: '#525252',
+        callback: function(value) {
+          if (typeof value === 'number') {
+            if (value >= 1000000) {
+              return '$' + (value / 1000000).toFixed(1) + 'M';
+            } else if (value >= 1000) {
+              return '$' + (value / 1000).toFixed(0) + 'K';
+            }
+            return '$' + value.toFixed(0);
+          }
+          return value;
+        },
+      },
+    },
+  },
+};
 
 // Chart theme for compatibility
 export const chartTheme = {
   colors: {
-    primary: '#2563eb',
-    secondary: '#10b981',
-    tertiary: '#f59e0b',
-    danger: '#ef4444',
+    primary: '#1a2332',
+    secondary: '#d4af37',
+    tertiary: '#059669',
+    danger: '#dc2626',
   }
 };
 
-// Luxury chart colors for compatibility
-export const LUXURY_CHART_COLORS = CHART_COLORS;
+// Luxury chart colors
+// Clean professional palette - Blue theme
+export const LUXURY_CHART_COLORS = {
+  // Primary chart colors - minimal variation
+  primary: '#1a2b6d',                        // Navy
+  secondary: '#38bdf8',                      // Sky blue
+  accent: '#1e40af',                         // Royal blue
+  
+  // Data lines - blue variations
+  percentile90: '#1e40af',                   // Royal blue
+  percentile50: '#1a2b6d',                   // Navy (main)
+  percentile10: '#38bdf8',                   // Sky blue
+  
+  // Portfolio types - blue spectrum
+  conservative: '#38bdf8',                   // Sky blue
+  balanced: '#1a2b6d',                       // Navy
+  aggressive: '#1e40af',                     // Royal blue
+  
+  // Semantic colors - muted
+  positive: '#1a2b6d',                       // Navy (instead of green)
+  negative: '#dc2626',                       // Red (use rarely)
+  neutral: '#6b7280',                        // Gray
+  
+  // Legacy mapping
+  gold: '#1a2b6d',                           // Now navy
+  navy: '#1a2b6d',
+  green: '#1a2b6d',                          // Now navy
+};
 
 // Withdrawal chart options
 export const WITHDRAWAL_CHART_OPTIONS = DEFAULT_CHART_OPTIONS;

@@ -152,7 +152,7 @@ def api_calculate():
                 'percentile_90': sim_results['percentile_paths']['p90'][-1],
                 'annual_withdrawal': withdrawal,
                 'withdrawal_rate': sim_results['withdrawal_rate'],
-                'projection_data': json.dumps(projection_data)
+                'projection_data': projection_data
             }
         
         return jsonify(results)

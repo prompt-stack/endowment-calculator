@@ -13,25 +13,33 @@ import './withdrawal-chart.css';
 interface WithdrawalChartProps {
   results: MonteCarloResults | PortfolioResult;
   inputs: CalculatorInputs;
-  height?: number;
 }
 
-export function WithdrawalChart({ results, inputs, height = 400 }: WithdrawalChartProps) {
+export function WithdrawalChart({ results, inputs }: WithdrawalChartProps) {
   // Normalize results to handle both MonteCarloResults and PortfolioResult
   const portfolioResult: PortfolioResult = 'portfolios' in results 
     ? results.portfolios[inputs.portfolioId] || results.portfolios.balanced
     : results;
   
+  // Extract median data from projection_data
+  const getMedianData = () => {
+    if (!portfolioResult.projection_data?.datasets) return [];
+    const medianDataset = portfolioResult.projection_data.datasets.find(
+      (d: any) => d.label?.includes('Median') || d.label?.includes('50th')
+    );
+    return medianDataset?.data || [];
+  };
+
   // Calculate annual withdrawal amounts
   const years = portfolioResult.projection_data?.labels || [];
-  const medianPortfolioValues = portfolioResult.percentile_paths?.p50 || [];
+  const medianPortfolioValues = getMedianData();
   
   // Calculate withdrawal amounts for each year
-  const withdrawalAmounts = years.map((year) => {
-    if (year === 0) return 0;
+  const withdrawalAmounts = years.map((_, index) => {
+    if (index === 0) return 0;
     
     // Check if portfolio has value to withdraw from
-    const currentPortfolioValue = medianPortfolioValues[year - 1] || 0;
+    const currentPortfolioValue = medianPortfolioValues[index] || 0;
     
     // If portfolio is depleted, no withdrawal possible
     if (currentPortfolioValue <= 0) {
@@ -48,7 +56,7 @@ export function WithdrawalChart({ results, inputs, height = 400 }: WithdrawalCha
       
       // Apply inflation if enabled
       if (inputs.adjustForInflation) {
-        baseWithdrawal = baseWithdrawal * Math.pow(1 + (inputs.inflationRate / 100), year - 1);
+        baseWithdrawal = baseWithdrawal * Math.pow(1 + (inputs.inflationRate / 100), index);
       }
       
       // Can't withdraw more than what's available
@@ -77,7 +85,7 @@ export function WithdrawalChart({ results, inputs, height = 400 }: WithdrawalCha
       {
         label: 'Annual Withdrawal',
         data: withdrawalAmounts,
-        borderColor: LUXURY_CHART_COLORS.gold,
+        borderColor: LUXURY_CHART_COLORS.secondary,
         backgroundColor: 'transparent',
         borderWidth: 2,
         borderDash: [8, 4],
@@ -97,9 +105,9 @@ export function WithdrawalChart({ results, inputs, height = 400 }: WithdrawalCha
         display: true,
         text: 'Portfolio Value vs Annual Withdrawals',
         font: {
-          family: 'Playfair Display, serif',
+          family: 'system-ui, -apple-system, sans-serif',
           size: 18,
-          weight: 400 as const,
+          weight: 500 as const,
         },
         color: '#1a1a1a',
         padding: { bottom: 24 },
@@ -154,7 +162,7 @@ export function WithdrawalChart({ results, inputs, height = 400 }: WithdrawalCha
   };
 
   return (
-    <div className="withdrawal-chart" style={{ height }}>
+    <div className="withdrawal-chart">
       <Line data={chartData} options={options} />
     </div>
   );

@@ -12,10 +12,9 @@ import './projection-chart.css';
 
 interface ProjectionChartProps {
   results: MonteCarloResults | PortfolioResult;
-  height?: number;
 }
 
-export function ProjectionChart({ results, height = 400 }: ProjectionChartProps) {
+export function ProjectionChart({ results }: ProjectionChartProps) {
   // Normalize results to handle both MonteCarloResults and PortfolioResult
   const portfolioResult: PortfolioResult = 'portfolios' in results 
     ? results.portfolios.balanced  // Default to balanced for MonteCarloResults
@@ -36,12 +35,19 @@ export function ProjectionChart({ results, height = 400 }: ProjectionChartProps)
   if (chartData.datasets && chartData.datasets.length > 0) {
     chartData.datasets = chartData.datasets.map((dataset: any, index: number) => {
       const colors = [LUXURY_CHART_COLORS.percentile90, LUXURY_CHART_COLORS.percentile50, LUXURY_CHART_COLORS.percentile10];
+      const isMedian = index === 1; // Middle dataset is typically the median
       return {
         ...dataset,
-        borderColor: colors[index] || LUXURY_CHART_COLORS.primary,
+        borderColor: dataset.borderColor || colors[index] || LUXURY_CHART_COLORS.primary,
         backgroundColor: 'transparent',
+        borderWidth: dataset.borderWidth || (isMedian ? 3 : 2),
         pointRadius: 0,
-        pointHoverRadius: 4,
+        pointHoverRadius: 6,
+        pointBackgroundColor: dataset.borderColor || colors[index],
+        pointBorderColor: '#fff',
+        pointBorderWidth: 2,
+        tension: 0.4,
+        borderDash: dataset.borderDash || undefined,
       };
     });
   }
@@ -54,9 +60,9 @@ export function ProjectionChart({ results, height = 400 }: ProjectionChartProps)
         display: true,
         text: 'Portfolio Value Projection',
         font: {
-          family: 'Playfair Display, serif',
+          family: 'system-ui, -apple-system, sans-serif',
           size: 18,
-          weight: 400 as const,
+          weight: 500 as const,
         },
         color: '#1a1a1a',
         padding: { bottom: 24 },
@@ -65,7 +71,7 @@ export function ProjectionChart({ results, height = 400 }: ProjectionChartProps)
   };
 
   return (
-    <div className="projection-chart" style={{ height }}>
+    <div className="projection-chart">
       <Line data={chartData} options={options} />
     </div>
   );

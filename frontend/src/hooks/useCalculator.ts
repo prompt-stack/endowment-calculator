@@ -8,21 +8,34 @@ import { useState, useCallback, useEffect } from 'react';
 import { calculatorApi } from '../services/api';
 import type { CalculatorInputs, CalculatorState } from '../types/calculator';
 
-const initialInputs: CalculatorInputs = {
-  startingBalance: 1000000,
-  withdrawalMethod: 'percentage',
-  withdrawalRate: 4,
-  withdrawalAmount: 40000,
-  years: 30,
-  portfolioId: 'balanced',
-  inflationRate: 3,
-  managementFee: 1,
-  adjustForInflation: true,
+const getInitialInputs = (): CalculatorInputs => {
+  // Try to load from localStorage
+  const saved = localStorage.getItem('calculatorInputs');
+  if (saved) {
+    try {
+      return JSON.parse(saved);
+    } catch (e) {
+      console.error('Failed to parse saved inputs:', e);
+    }
+  }
+  
+  // Default values
+  return {
+    startingBalance: 1000000,
+    withdrawalMethod: 'percentage',
+    withdrawalRate: 4,
+    withdrawalAmount: 40000,
+    years: 30,
+    portfolioId: 'balanced',
+    inflationRate: 3,
+    managementFee: 1,
+    adjustForInflation: true,
+  };
 };
 
 export function useCalculator() {
   const [state, setState] = useState<CalculatorState>({
-    inputs: initialInputs,
+    inputs: getInitialInputs(),
     results: null,
     loading: false,
     error: null,
@@ -49,11 +62,16 @@ export function useCalculator() {
   }, []);
 
   const updateInputs = useCallback((updates: Partial<CalculatorInputs>) => {
-    setState(prev => ({
-      ...prev,
-      inputs: { ...prev.inputs, ...updates },
-      error: null,
-    }));
+    setState(prev => {
+      const newInputs = { ...prev.inputs, ...updates };
+      // Save to localStorage
+      localStorage.setItem('calculatorInputs', JSON.stringify(newInputs));
+      return {
+        ...prev,
+        inputs: newInputs,
+        error: null,
+      };
+    });
     // Mark that we have unsaved changes if we had results
     if (state.results) {
       setHasUnsavedChanges(true);

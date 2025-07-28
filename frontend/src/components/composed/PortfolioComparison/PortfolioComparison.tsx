@@ -30,10 +30,17 @@ export function PortfolioComparison({ results, selectedPortfolioId }: PortfolioC
     return 'danger';
   };
 
-  const getRiskLevel = (volatility: number) => {
-    if (volatility <= 0.13) return 'Low';
-    if (volatility <= 0.16) return 'Medium';
+  const getRiskLevel = (stocksPercentage: number) => {
+    if (stocksPercentage <= 50) return 'Low';
+    if (stocksPercentage <= 70) return 'Medium';
     return 'High';
+  };
+  
+  const getStocksBondsFromName = (name: string) => {
+    if (name.includes('50/50')) return { stocks: 50, bonds: 50 };
+    if (name.includes('70/30')) return { stocks: 70, bonds: 30 };
+    if (name.includes('90/10')) return { stocks: 90, bonds: 10 };
+    return { stocks: 0, bonds: 0 };
   };
 
   return (
@@ -53,44 +60,47 @@ export function PortfolioComparison({ results, selectedPortfolioId }: PortfolioC
             </tr>
           </thead>
           <tbody>
-            {portfolios.map(({ key, data }) => (
-              <tr 
-                key={key} 
-                className={selectedPortfolioId === key ? 'selected' : ''}
-              >
-                <td>
-                  <div className="portfolio-comparison__name">
-                    {data.portfolio.name}
-                  </div>
-                </td>
-                <td>
-                  <div className={`portfolio-comparison__success-rate ${getSuccessRateClass(data.success_rate)}`}>
-                    {formatPercentage(data.success_rate)}
-                  </div>
-                </td>
-                <td>
-                  <div className="portfolio-comparison__balance">
-                    {formatCurrency(data.median_final_balance)}
-                  </div>
-                </td>
-                <td>
-                  <div className="portfolio-comparison__return">
-                    {formatPercentage(data.portfolio.expected_return)}
-                  </div>
-                </td>
-                <td>
-                  <div className={`portfolio-comparison__risk risk-${getRiskLevel(data.portfolio.volatility).toLowerCase()}`}>
-                    {getRiskLevel(data.portfolio.volatility)}
-                  </div>
-                </td>
-                <td>
-                  <div className="portfolio-comparison__allocation">
-                    <span className="allocation-stocks">{data.portfolio.stocks_percentage}% Stocks</span>
-                    <span className="allocation-bonds">{data.portfolio.bonds_percentage}% Bonds</span>
-                  </div>
-                </td>
-              </tr>
-            ))}
+            {portfolios.map(({ key, data }) => {
+              const allocation = getStocksBondsFromName(data.portfolio.name);
+              return (
+                <tr 
+                  key={key} 
+                  className={selectedPortfolioId === key ? 'selected' : ''}
+                >
+                  <td>
+                    <div className="portfolio-comparison__name">
+                      {data.portfolio.name}
+                    </div>
+                  </td>
+                  <td>
+                    <div className={`portfolio-comparison__success-rate ${getSuccessRateClass(data.success_rate)}`}>
+                      {formatPercentage(data.success_rate)}
+                    </div>
+                  </td>
+                  <td>
+                    <div className="portfolio-comparison__balance">
+                      {formatCurrency(data.median_final_balance)}
+                    </div>
+                  </td>
+                  <td>
+                    <div className="portfolio-comparison__return">
+                      {formatPercentage(data.portfolio.expected_return)}
+                    </div>
+                  </td>
+                  <td>
+                    <div className={`portfolio-comparison__risk risk-${getRiskLevel(allocation.stocks).toLowerCase()}`}>
+                      {getRiskLevel(allocation.stocks)}
+                    </div>
+                  </td>
+                  <td>
+                    <div className="portfolio-comparison__allocation">
+                      <span className="allocation-stocks">{allocation.stocks}% Stocks</span>
+                      <span className="allocation-bonds">{allocation.bonds}% Bonds</span>
+                    </div>
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </div>

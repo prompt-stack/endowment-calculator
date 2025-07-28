@@ -9,9 +9,9 @@ from typing import Dict, List
 import json
 
 
-def generate_projection_data(percentile_paths: Dict[str, List[float]], years: int) -> str:
+def generate_projection_data(percentile_paths: Dict[str, List[float]], years: int) -> Dict:
     """
-    Generate chart data as JSON for client-side rendering.
+    Generate chart data as dictionary for client-side rendering.
     """
     # Prepare data for JavaScript charting
     chart_data = {
@@ -20,28 +20,28 @@ def generate_projection_data(percentile_paths: Dict[str, List[float]], years: in
             {
                 'label': '90th Percentile',
                 'data': percentile_paths['p90'],
-                'borderColor': '#059669',
+                'borderColor': '#1e40af',  # Royal blue
                 'backgroundColor': 'transparent',
                 'borderDash': [5, 5]
             },
             {
                 'label': 'Median (50th)',
                 'data': percentile_paths['p50'],
-                'borderColor': '#dc2626',
+                'borderColor': '#1a2b6d',  # Navy
                 'backgroundColor': 'transparent',
                 'borderWidth': 3
             },
             {
                 'label': '10th Percentile',
                 'data': percentile_paths['p10'],
-                'borderColor': '#d97706',
+                'borderColor': '#38bdf8',  # Sky blue
                 'backgroundColor': 'transparent',
                 'borderDash': [5, 5]
             }
         ]
     }
     
-    return json.dumps(chart_data)
+    return chart_data
 
 
 def generate_svg_chart(balance: float, withdrawal: float, years: int, success_rate: float) -> str:

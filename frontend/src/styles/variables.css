@@ -5,45 +5,50 @@
  */
 
 :root {
-  /* Colors */
-  --color-primary: #2563eb;
-  --color-primary-dark: #1e40af;
-  --color-primary-light: #60a5fa;
+  /* Zenith Brand Colors */
+  --color-primary: #1a2b6d;
+  --color-primary-dark: #0f1a4a;
+  --color-primary-light: #2b3c7e;
   
-  --color-secondary: #10b981;
-  --color-secondary-dark: #059669;
-  --color-secondary-light: #34d399;
+  --color-secondary: #7cb342;
+  --color-secondary-dark: #5a8530;
+  --color-secondary-light: #9bc563;
   
-  --color-tertiary: #f59e0b;
-  --color-tertiary-dark: #d97706;
-  --color-tertiary-light: #fbbf24;
+  --color-tertiary: #059669;
+  --color-tertiary-dark: #047857;
+  --color-tertiary-light: #10b981;
   
-  --color-danger: #ef4444;
-  --color-danger-dark: #dc2626;
-  --color-danger-light: #f87171;
+  --color-danger: #dc2626;
+  --color-danger-dark: #b91c1c;
+  --color-danger-light: #ef4444;
   
-  --color-neutral-900: #111827;
-  --color-neutral-800: #1f2937;
-  --color-neutral-700: #374151;
-  --color-neutral-600: #4b5563;
-  --color-neutral-500: #6b7280;
-  --color-neutral-400: #9ca3af;
-  --color-neutral-300: #d1d5db;
-  --color-neutral-200: #e5e7eb;
-  --color-neutral-100: #f3f4f6;
-  --color-neutral-50: #f9fafb;
+  --color-neutral-900: #1a1a1a;
+  --color-neutral-800: #2d2d2d;
+  --color-neutral-700: #404040;
+  --color-neutral-600: #525252;
+  --color-neutral-500: #737373;
+  --color-neutral-400: #a3a3a3;
+  --color-neutral-300: #d4d4d4;
+  --color-neutral-200: #e5e5e5;
+  --color-neutral-100: #f5f5f5;
+  --color-neutral-50: #fafafa;
   --color-white: #ffffff;
   
   /* Legacy color mappings for compatibility */
-  --color-charcoal: var(--color-neutral-900);
+  --color-charcoal: var(--color-primary);
   --color-pure: var(--color-white);
-  --color-gold: var(--color-tertiary);
+  --color-gold: var(--color-primary);
+  --color-navy: var(--color-primary);
+  --color-green: var(--color-secondary);
   
-  /* Typography */
-  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  --font-mono: 'Courier New', Courier, monospace;
+  /* Semantic colors */
+  --color-success: #7cb342;
+  --color-warning: #f59e0b;
+  
+  /* Professional Typography */
+  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 
+    'Helvetica Neue', Arial, sans-serif;
+  --font-mono: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', monospace;
   
   /* Font sizes */
   --text-xs: 0.75rem;

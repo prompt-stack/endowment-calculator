@@ -1,0 +1,91 @@
+/**
+ * @fileoverview Unified minimal luxury chart theme
+ * @layer theme
+ * @status stable
+ */
+
+/* Chart container base styles */
+.chart-container {
+  background: #ffffff;
+  border: 1px solid rgba(26, 35, 50, 0.08);
+  border-radius: 8px;
+  padding: 2rem;
+  box-shadow: 0 2px 8px rgba(26, 35, 50, 0.04);
+  margin-bottom: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.chart-container:hover {
+  box-shadow: 0 4px 12px rgba(26, 35, 50, 0.08);
+}
+
+/* Chart canvas styles */
+.chart-container canvas {
+  max-width: 100% !important;
+  height: 320px !important;
+}
+
+/* Minimal color palette for charts */
+:root {
+  /* Primary charcoal for main data */
+  --chart-primary: #1a2332;
+  --chart-primary-light: rgba(26, 35, 50, 0.8);
+  --chart-primary-lighter: rgba(26, 35, 50, 0.6);
+  
+  /* Subtle gold accent for highlights */
+  --chart-accent: #d4af37;
+  --chart-accent-light: rgba(212, 175, 55, 0.8);
+  --chart-accent-lighter: rgba(212, 175, 55, 0.3);
+  
+  /* Neutral grays for secondary elements */
+  --chart-neutral-900: #1f2937;
+  --chart-neutral-700: #4b5563;
+  --chart-neutral-500: #6b7280;
+  --chart-neutral-300: #d1d5db;
+  --chart-neutral-100: #f3f4f6;
+  
+  /* Subtle semantic colors */
+  --chart-success: #059669;
+  --chart-success-light: rgba(5, 150, 105, 0.2);
+  --chart-danger: #dc2626;
+  --chart-danger-light: rgba(220, 38, 38, 0.2);
+  
+  /* Grid and text */
+  --chart-grid: rgba(26, 35, 50, 0.06);
+  --chart-text: #4b5563;
+  --chart-text-light: #6b7280;
+}
+
+/* Typography for charts */
+.chart-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: var(--chart-primary);
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.chart-subtitle {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 0.875rem;
+  color: var(--chart-text);
+  text-align: center;
+  margin-top: -1rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Responsive sizing */
+@media (max-width: 768px) {
+  .chart-container {
+    padding: 1.5rem;
+  }
+  
+  .chart-container canvas {
+    height: 240px !important;
+  }
+  
+  .chart-title {
+    font-size: 1.125rem;
+  }
+}

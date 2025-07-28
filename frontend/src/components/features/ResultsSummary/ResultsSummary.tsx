@@ -68,14 +68,14 @@ export function ResultsSummary({ results, inputs }: ResultsSummaryProps) {
         
         <ResultsCard
           title="10th Percentile"
-          value={formatCurrency(portfolioResult.percentile_paths?.p10?.[portfolioResult.percentile_paths.p10.length - 1] || 0)}
+          value={formatCurrency(portfolioResult.percentile_10 || 0)}
           label="Worst case scenario"
           variant="danger"
         />
         
         <ResultsCard
           title="90th Percentile"
-          value={formatCurrency(portfolioResult.percentile_paths?.p90?.[portfolioResult.percentile_paths.p90.length - 1] || 0)}
+          value={formatCurrency(portfolioResult.percentile_90 || 0)}
           label="Best case scenario"
           variant="success"
         />
@@ -115,8 +115,11 @@ function calculateTotalWithdrawals(inputs: CalculatorInputs, results: PortfolioR
   let total = 0;
   
   if (inputs.withdrawalMethod === 'percentage') {
-    // For percentage method, use actual portfolio values
-    const medianPath = results.percentile_paths.p50;
+    // For percentage method, use actual portfolio values from projection_data
+    const medianDataset = results.projection_data?.datasets?.find((d: any) => 
+      d.label?.includes('Median') || d.label?.includes('50th')
+    );
+    const medianPath = medianDataset?.data || [];
     
     for (let year = 1; year <= inputs.years; year++) {
       if (year - 1 < medianPath.length) {
@@ -144,8 +147,11 @@ function calculateTotalWithdrawals(inputs: CalculatorInputs, results: PortfolioR
 
 function calculateFinalWithdrawal(inputs: CalculatorInputs, results: PortfolioResult): number {
   if (inputs.withdrawalMethod === 'percentage') {
-    // For percentage, use the final year's portfolio value
-    const medianPath = results.percentile_paths.p50;
+    // For percentage, use the final year's portfolio value from projection_data
+    const medianDataset = results.projection_data?.datasets?.find((d: any) => 
+      d.label?.includes('Median') || d.label?.includes('50th')
+    );
+    const medianPath = medianDataset?.data || [];
     const finalYearIndex = inputs.years - 1;
     
     if (finalYearIndex < medianPath.length && medianPath[finalYearIndex] > 0) {

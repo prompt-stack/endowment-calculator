@@ -36,6 +36,8 @@ export interface PortfolioResult {
   };
   success_rate: number;
   median_final_balance: number;
+  percentile_10?: number;
+  percentile_90?: number;
   percentile_paths: {
     p10: number[];
     p50: number[];
