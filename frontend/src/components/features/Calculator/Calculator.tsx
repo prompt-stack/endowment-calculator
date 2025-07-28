@@ -16,7 +16,7 @@ import { ProjectionChart, WithdrawalChart } from '../../composed';
 import { ResultsSummary } from '../ResultsSummary/ResultsSummary';
 import { PortfolioComparison } from '../../composed/PortfolioComparison/PortfolioComparison';
 import { PortfolioComparisonChart } from '../../composed/PortfolioComparisonChart/PortfolioComparisonChart';
-import './calculator-simple.css';
+import './calculator.css';
 
 export function Calculator() {
   const {

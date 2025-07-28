@@ -5,7 +5,7 @@
  * @dependencies []
  */
 
-import './button-simple.css';
+import './button.css';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: 'primary' | 'secondary' | 'danger';
