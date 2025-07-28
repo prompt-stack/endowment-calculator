@@ -8,7 +8,7 @@
 import { ResultsCard } from '../../composed/ResultsCard/ResultsCard';
 import type { MonteCarloResults, CalculatorInputs, PortfolioResult } from '../../../types/calculator';
 import { formatCurrency, formatPercentage } from '../../../utils/chartConfig';
-import './results-summary-luxury.css';
+import './results-summary.css';
 
 interface ResultsSummaryProps {
   results: MonteCarloResults | PortfolioResult;

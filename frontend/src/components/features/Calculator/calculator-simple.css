@@ -4,8 +4,8 @@
  * @theme Clean and Functional
  */
 
-/* Import base luxury styles for layout */
-@import './calculator-luxury.css';
+/* Import base styles for layout */
+@import './calculator.css';
 
 /* Override complex animations and effects */
 .calculator__year-btn {

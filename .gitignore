@@ -53,3 +53,4 @@ grammar-ops-main/
 # Old files
 app_old.py
 EOF < /dev/null
+.vercel

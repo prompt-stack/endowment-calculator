@@ -6,7 +6,7 @@
 
 import { Line } from 'react-chartjs-2';
 import type { PortfolioResult } from '../../../types/calculator';
-import { LUXURY_CHART_OPTIONS } from '../../../utils/luxuryChartConfig';
+import { LUXURY_CHART_OPTIONS } from '../../../utils/chartConfig';
 import './portfolio-comparison-chart.css';
 
 interface PortfolioComparisonChartProps {

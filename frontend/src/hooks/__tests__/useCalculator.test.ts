@@ -80,12 +80,15 @@ describe('useCalculator', () => {
   })
 
   it('calls API and updates results on calculate', async () => {
-    const mockResults = {
+    const mockResults: any = {
       portfolios: {
         conservative: { success_rate: 0.7 },
         balanced: { success_rate: 0.8 },
         aggressive: { success_rate: 0.85 },
       },
+      withdrawal_amount: 40000,
+      withdrawal_method: 'percentage',
+      years: 30
     }
     
     vi.mocked(api.calculatorApi.calculateMonteCarlo).mockResolvedValue(mockResults)
@@ -135,15 +138,24 @@ describe('useCalculator', () => {
   })
 
   it('generates PDF when results exist', async () => {
-    const mockResults = { portfolios: {} }
+    const mockResults: any = { 
+      portfolios: {
+        conservative: {},
+        balanced: {},
+        aggressive: {}
+      },
+      withdrawal_amount: 40000,
+      withdrawal_method: 'percentage',
+      years: 30
+    }
     const mockBlob = new Blob(['pdf content'], { type: 'application/pdf' })
     
     vi.mocked(api.calculatorApi.generatePdf).mockResolvedValue(mockBlob)
     
     // Mock URL.createObjectURL and document.createElement
-    const mockUrl = 'blob:mock-url'
-    global.URL.createObjectURL = vi.fn(() => mockUrl)
-    global.URL.revokeObjectURL = vi.fn()
+    const mockUrl = 'blob:mock-url';
+    (globalThis as any).URL.createObjectURL = vi.fn(() => mockUrl);
+    (globalThis as any).URL.revokeObjectURL = vi.fn();
     
     const mockAnchor = {
       href: '',
@@ -171,7 +183,7 @@ describe('useCalculator', () => {
     expect(mockAnchor.href).toBe(mockUrl)
     expect(mockAnchor.download).toBe('endowment-analysis.pdf')
     expect(mockAnchor.click).toHaveBeenCalled()
-    expect(global.URL.revokeObjectURL).toHaveBeenCalledWith(mockUrl)
+    expect((globalThis as any).URL.revokeObjectURL).toHaveBeenCalledWith(mockUrl)
   })
 
   it('clears results', () => {
@@ -179,7 +191,16 @@ describe('useCalculator', () => {
     
     // Set some results
     act(() => {
-      result.current.results = { portfolios: {} }
+      result.current.results = { 
+        portfolios: {
+          conservative: {} as any,
+          balanced: {} as any,
+          aggressive: {} as any
+        },
+        withdrawal_amount: 40000,
+        withdrawal_method: 'percentage',
+        years: 30
+      } as any
       result.current.error = 'Some error'
     })
     

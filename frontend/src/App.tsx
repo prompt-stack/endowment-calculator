@@ -4,7 +4,6 @@
  * @status stable
  */
 
-import { useState, useEffect } from 'react';
 import { Calculator } from './components/features/Calculator/Calculator';
 // ConfigShowcase removed - single page app
 import { ErrorBoundary } from './components/ErrorBoundary';

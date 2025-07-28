@@ -5,7 +5,7 @@
  * @dependencies []
  */
 
-import './results-card-luxury.css';
+import './results-card.css';
 
 interface ResultsCardProps {
   title: string;

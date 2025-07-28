@@ -7,7 +7,7 @@
 
 import { Line } from 'react-chartjs-2';
 import type { MonteCarloResults, PortfolioResult } from '../../../types/calculator';
-import { LUXURY_CHART_OPTIONS, LUXURY_CHART_COLORS } from '../../../utils/luxuryChartConfig';
+import { LUXURY_CHART_OPTIONS, LUXURY_CHART_COLORS } from '../../../utils/chartConfig';
 import './projection-chart.css';
 
 interface ProjectionChartProps {

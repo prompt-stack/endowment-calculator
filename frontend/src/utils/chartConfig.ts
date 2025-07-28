@@ -39,6 +39,11 @@ export const CHART_COLORS = {
   positive: '#059669',
   negative: '#dc2626',
   neutral: '#6b7280',
+  percentile90: '#059669',
+  percentile50: '#1a2332',
+  percentile10: '#dc2626',
+  primary: '#2563eb',
+  gold: '#f59e0b',
 };
 
 // Common chart options
@@ -147,3 +152,22 @@ export const formatCurrency = (value: number): string => {
 export const formatPercentage = (value: number): string => {
   return `${(value * 100).toFixed(1)}%`;
 };
+
+// Luxury chart options for compatibility
+export const LUXURY_CHART_OPTIONS = DEFAULT_CHART_OPTIONS;
+
+// Chart theme for compatibility
+export const chartTheme = {
+  colors: {
+    primary: '#2563eb',
+    secondary: '#10b981',
+    tertiary: '#f59e0b',
+    danger: '#ef4444',
+  }
+};
+
+// Luxury chart colors for compatibility
+export const LUXURY_CHART_COLORS = CHART_COLORS;
+
+// Withdrawal chart options
+export const WITHDRAWAL_CHART_OPTIONS = DEFAULT_CHART_OPTIONS;
