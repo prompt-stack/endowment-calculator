@@ -241,6 +241,7 @@ export function Calculator() {
             variant="primary" 
             size="lg" 
             loading={loading}
+            loadingText="Calculating..."
             disabled={loading}
             onClick={handleSubmit}
             style={{ width: '100%' }}

@@ -11,6 +11,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: 'primary' | 'secondary' | 'danger';
   size?: 'sm' | 'md' | 'lg';
   loading?: boolean;
+  loadingText?: string;
   children: React.ReactNode;
 }
 
@@ -18,6 +19,7 @@ export function Button({
   variant = 'primary', 
   size = 'md', 
   loading = false,
+  loadingText = 'Loading...',
   disabled,
   children,
   className = '',
@@ -40,7 +42,7 @@ export function Button({
       {loading ? (
         <>
           <span className="btn__spinner" />
-          <span className="btn__text">Loading...</span>
+          <span className="btn__text">{loadingText}</span>
         </>
       ) : (
         children
